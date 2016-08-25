@@ -1,0 +1,7 @@
+body { padding-top: 50px; }
+
+@media print {
+  a[href]:after {
+    content: none;
+  }
+}

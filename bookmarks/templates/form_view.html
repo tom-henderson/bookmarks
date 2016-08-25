@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load form_extras %}
+
+{% block content %}
+<div class="container" id="item-list">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>bookmarks</h1>
+      <h3>Edit {{ form.instance }}</h3>
+    </div>
+  </div>
+</div>
+
+
+
+<form class="container form-horizontal" role="form" method="post" action".">
+  {% csrf_token %}
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>{{ subheading }}</h4>
+
+      {% for field in form %}
+
+      <div class="form-group {% if field.errors %}has-error{% endif %}">
+
+        <label for="{{field.id_for_label}}" class="col-xs-4 col-sm-3 control-label">
+          {{ field.label|title }}
+        </label>
+
+        <div class="col-xs-6">
+          {% if field|field_type != "CheckboxInput" %}
+            {{ field }}
+          {% else %}
+            <ul class="list-unstyled">
+              {% for checkbox in field %}
+              <li class="checkbox">{{ checkbox }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+
+      </div>
+
+      {% endfor %}
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <div class="col-xs-offset-4 col-sm-offset-3 col-xs-4">
+              <button type="submit" class="btn btn-primary">
+                {% if submit_button_label %}
+                  {{ submit_button_label }}
+                {% else %}
+                  Submit
+                {% endif %}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</form>
+
+{% endblock %}

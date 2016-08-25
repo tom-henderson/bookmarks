@@ -1,0 +1,45 @@
+{% if user.is_authenticated %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">bookmarks</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav pull-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}
+            {% elif user.email %}{{ user.email }}
+            {% else %}{{ user.username }}{% endif %}
+            &nbsp;<b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">Admin</a></li>{% endif %}
+            <li><a href="#">My Account</a></li>
+            <li><a href="{% url 'log_out' %}">Log Out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% else %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">bookmarks</a>
+    </div>
+  </div>
+</nav>
+
+{% endif %}
