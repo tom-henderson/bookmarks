@@ -1,29 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <nav class="navbar navbar-default hidden-xs">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">{{ title }}</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="customers-toolbar">
-
-             <form class="navbar-form navbar-right" action="" method="get" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" name="search" placeholder="Search..." {% if request.GET.search %}value="{{request.GET.search}}"{% endif %}>
-              </div>
-            </form> 
-            
-          </div>
-        </div>
-      </nav>
-    </div>
-  </div>
-</div>
 
 <div class="container">
   <div class="row">
@@ -39,7 +16,11 @@
         {{bookmark.description}}<br />
       {%endif%}
       {% for tag in bookmark.tags.all %}
-        <span class="label label-default">{{tag.name}}</span>
+        <a href="{% url 'tag' tag.slug %}" class="label label-default
+        {% if tag.slug == slug %}
+          label-info
+        {% endif %}
+        ">{{tag.name}}</a> 
       {% endfor %}
       <br /><br />
 

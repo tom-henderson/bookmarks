@@ -1,6 +1,6 @@
 {% if user.is_authenticated %}
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -9,11 +9,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">bookmarks</a>
+      <a class="navbar-brand" href="{% url 'index' %}">Bookmarks</a>
+      {% if slug %}<p class="navbar-text">{{slug}}</p>{% endif %}
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav pull-right">
+        <li>
+          <form class="navbar-form navbar-right" action="" method="get" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" name="search" placeholder="Search..." {% if request.GET.search %}value="{{request.GET.search}}"{% endif %}>
+            </div>
+          </form> 
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}
@@ -34,10 +42,11 @@
 
 {% else %}
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">bookmarks</a>
+      <a class="navbar-brand" href="{% url 'index' %}">Bookmarks</a>
+      {% if slug %}<p class="navbar-text">{{slug}}</p>{% endif %}
     </div>
   </div>
 </nav>
