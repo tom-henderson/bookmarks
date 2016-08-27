@@ -103,7 +103,11 @@ DJANGO_APPS = (
     'django.contrib.admin',
 )
 
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    'taggit',
+)
+
+TAGGIT_CASE_INSENSITIVE = True
 
 LOCAL_APPS = (
     'common',
