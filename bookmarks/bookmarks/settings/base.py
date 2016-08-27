@@ -106,6 +106,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'taggit',
+    'taggit_helpers',
 )
 
 TAGGIT_CASE_INSENSITIVE = True

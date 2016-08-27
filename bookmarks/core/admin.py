@@ -1,18 +1,22 @@
 from django.contrib import admin
 
+from taggit_helpers.admin import TaggitCounter, TaggitListFilter
+
 from .models import Bookmark
 
 
-class BookmarkAdmin(admin.ModelAdmin):
+class BookmarkAdmin(TaggitCounter, admin.ModelAdmin):
     list_display = [
         'title',
         'description',
+        'date_added',
         'tag_list',
-        'tag_count',
+        'taggit_counter',
         'link',
     ]
     list_filter = [
-        'tags',
+        'date_added',
+        TaggitListFilter
     ]
     ordering = ('-add_date',)
     search_fields = ('title', 'description')
@@ -25,9 +29,6 @@ class BookmarkAdmin(admin.ModelAdmin):
 
     def tag_list(self, obj):
         return u", ".join(o.name for o in obj.tags.all())
-
-    def tag_count(self, obj):
-        return len(obj.tags.all())
 
     def link(self, obj):
         return u"<a href='{}'>\U0001F517</a>".format(obj.url)
