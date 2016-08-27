@@ -1,0 +1,14 @@
+{% load template_extras %}
+
+<nav>
+  <ul class="pager">
+    {% if page_obj.has_previous %}
+      <li class="previous"><a href="?{% url_replace request 'page' page_obj.previous_page_number %}"><span aria-hidden="true">&larr;</span> Previous</a></li>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+      <li class="next"><a href="?{% url_replace request 'page' page_obj.next_page_number %}">Next <span aria-hidden="true">&rarr;</span></a></li>
+    {% endif %}
+  </ul>
+</nav>
+
