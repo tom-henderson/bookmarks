@@ -18,7 +18,7 @@
       {% for tag in bookmark.tags.all %}
         <a href="{% url 'tag' tag.slug %}" class="label label-default
         {% if tag.slug == slug %}
-          label-info
+          label-primary
         {% endif %}
         ">{{tag.name}}</a> 
       {% endfor %}
