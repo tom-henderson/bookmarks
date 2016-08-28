@@ -31,7 +31,6 @@
           </a>
           <ul class="dropdown-menu">
             {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">Admin</a></li>{% endif %}
-            <li><a href="#">My Account</a></li>
             <li><a href="{% url 'log_out' %}">Log Out</a></li>
           </ul>
         </li>
