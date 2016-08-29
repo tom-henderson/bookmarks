@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath bookmarks bookmarks.wsgi
+web: gunicorn --pythonpath bookmarks bookmarks.wsgi --log-file -
