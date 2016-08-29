@@ -66,7 +66,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             DJANGO_ROOT,
-            'templates'
+            'templates',
+            'bookmarks/templates'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
