@@ -20,7 +20,7 @@ def get_env_setting(setting):
 SECRET_KEY = get_env_setting('SECRET_KEY')
 
 # HOST CONFIGURATION
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # EMAIL CONFIGURATION
 # See:
