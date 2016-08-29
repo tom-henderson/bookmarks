@@ -24,14 +24,14 @@ ALLOWED_HOSTS = []
 
 # EMAIL CONFIGURATION
 # See:
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.gmail.com')
-#EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
-#EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'your_email@example.com')
-#EMAIL_PORT = environ.get('EMAIL_PORT', 587)
-#EMAIL_SUBJECT_PREFIX = '[{}] '.format(SITE_NAME)
-#EMAIL_USE_TLS = True
-#SERVER_EMAIL = EMAIL_HOST_USER
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = environ.get('EMAIL_HOST', 'smtp.gmail.com')
+# EMAIL_HOST_PASSWORD = environ.get('EMAIL_HOST_PASSWORD', '')
+# EMAIL_HOST_USER = environ.get('EMAIL_HOST_USER', 'your_email@example.com')
+# EMAIL_PORT = environ.get('EMAIL_PORT', 587)
+# EMAIL_SUBJECT_PREFIX = '[{}] '.format(SITE_NAME)
+# EMAIL_USE_TLS = True
+# SERVER_EMAIL = EMAIL_HOST_USER
 
 # DATABASE CONFIGURATION
 DATABASES = {
@@ -54,26 +54,26 @@ CACHES = {}
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#         'require_debug_false': {
+#             '()': 'django.utils.log.RequireDebugFalse'
+#         }
+#     },
+#     'handlers': {
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'filters': ['require_debug_false'],
+#             'class': 'django.utils.log.AdminEmailHandler'
+#         }
+#     },
+#     'loggers': {
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': True,
+#         },
+#     }
+# }# 
