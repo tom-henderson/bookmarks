@@ -32,8 +32,9 @@ EMAIL_SUBJECT_PREFIX = '[{}] '.format(SITE_NAME)
 EMAIL_USE_TLS = True
 SERVER_EMAIL = EMAIL_HOST_USER
 
-# DATABASE CONFIGURATION
-DATABASES = {}
+# Update database configuration with $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # CACHE CONFIGURATION
 CACHES = {}

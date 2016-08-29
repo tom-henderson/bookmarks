@@ -2,3 +2,4 @@ Django==1.10
 Python>=2.7
 django-taggit==0.21.1
 django-taggit-helpers==0.1.4
+whitenoise==3.2.1

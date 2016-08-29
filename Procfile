@@ -1,1 +1,1 @@
-web: gunicorn bookmarks.wsgi
+web: gunicorn --pythonpath bookmarks bookmarks.wsgi
