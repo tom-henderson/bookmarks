@@ -19,6 +19,9 @@ def get_env_setting(setting):
 # SECRET CONFIGURATION
 SECRET_KEY = get_env_setting('SECRET_KEY')
 
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # HOST CONFIGURATION
 ALLOWED_HOSTS = ['*']
 
