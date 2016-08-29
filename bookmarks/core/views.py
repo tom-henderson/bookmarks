@@ -10,6 +10,14 @@ class BookmarksList(ListView):
     context_object_name = 'bookmarks'
     paginate_by = 20
 
+    def get_queryset(self):
+        queryset = super(BookmarksList, self).get_queryset()
+
+        if not self.request.user.is_authenticated():
+            queryset = queryset.filter(private=False)
+
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super(BookmarksList, self).get_context_data(**kwargs)
         context['title'] = "Bookmarks"

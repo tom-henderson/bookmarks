@@ -8,22 +8,22 @@
     <div class="col-xs-12">
 
       {% for bookmark in bookmarks %}
-      <h4><a href="{{bookmark.url}}">{{bookmark.title}}</a>
-      {% if bookmark.date_added %}
-        <small>{{bookmark.date_added}}</small>
-      {% endif %}</h4>
-      {% if bookmark.description %}
-        {{bookmark.description}}<br />
-      {%endif%}
-      {% for tag in bookmark.tags.all %}
-        <a href="{% url 'tag' tag.slug %}" class="label label-default
-        {% if tag.slug == slug %}
-          label-primary
-        {% endif %}
-        ">{{tag.name}}</a> 
-      {% endfor %}
-      <br /><br />
-
+        <h4><a href="{{bookmark.url}}">{{bookmark.title}}</a>
+        {% if bookmark.date_added %}
+          <small>{{bookmark.date_added}}</small>
+        {% endif %}</h4>
+        {% if bookmark.description %}
+          {{bookmark.description}}<br />
+        {%endif%}
+        {% if bookmark.private %}<span class="label label-warning">private</span>{% endif %}
+        {% for tag in bookmark.tags.all %}
+          <a href="{% url 'tag' tag.slug %}" class="label label-default
+          {% if tag.slug == slug %}
+            label-primary
+          {% endif %}
+          ">{{tag.name}}</a> 
+        {% endfor %}
+        <br /><br />
       {% endfor %}
 
       {% include 'core/pagination.html' %}
