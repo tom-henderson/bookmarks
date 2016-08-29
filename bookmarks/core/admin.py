@@ -18,7 +18,7 @@ class BookmarkAdmin(TaggitCounter, admin.ModelAdmin):
         'date_added',
         TaggitListFilter
     ]
-    ordering = ('-add_date',)
+    ordering = ('-date_added',)
     search_fields = ('title', 'description')
     exclude = [
         'tag_import',

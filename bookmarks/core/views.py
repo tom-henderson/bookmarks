@@ -18,7 +18,8 @@ class BookmarksList(ListView):
 
 class BookmarkTagList(BookmarksList):
     def get_queryset(self):
-        return Bookmark.objects.filter(tags__slug=self.kwargs.get('slug'))
+        queryset = super(BookmarkTagList, self).get_queryset()
+        return queryset.filter(tags__slug=self.kwargs.get('slug'))
 
     def get_context_data(self, **kwargs):
         context = super(BookmarkTagList, self).get_context_data(**kwargs)
