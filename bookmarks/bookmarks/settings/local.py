@@ -55,13 +55,13 @@ LOGGING = {
     },
     'loggers': {
         'django': {
+            'level': 'INFO',
             'handlers': ['null'],
             'propagate': True,
-            'level': 'INFO',
         },
-        'wholesale': {
-            'handlers': ['console'],
+        'django.db.backends': {
             'level': 'DEBUG',
+            'handlers': ['null'],
         },
     }
 }
