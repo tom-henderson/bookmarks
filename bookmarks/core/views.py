@@ -16,7 +16,7 @@ class BookmarksList(ListView):
         if not self.request.user.is_authenticated():
             queryset = queryset.filter(private=False)
 
-        return queryset
+        return queryset.prefetch_related('tags')
 
     def get_context_data(self, **kwargs):
         context = super(BookmarksList, self).get_context_data(**kwargs)
