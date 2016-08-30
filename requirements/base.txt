@@ -1,5 +1,15 @@
 Django==1.10
 Python>=2.7
+
+# Whitenoise: Staticfile hosting
+whitenoise==3.2.1
+
+# Tagging
+# Taggit Helpers: TaggitCounter, TaggitListFilter
 django-taggit==0.21.1
 django-taggit-helpers==0.1.4
-whitenoise==3.2.1
+
+# Django REST Framework
+# Taggit Serializer: Serializer for the Django REST Framework
+djangorestframework
+django-taggit-serializer==0.1.5
