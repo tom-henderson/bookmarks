@@ -15,7 +15,7 @@ SITE_NAME = os.path.basename(DJANGO_ROOT)
 SECRET_KEY = "kvsi!brp-rjl%fvmm%5y8#e7+&chr1m^qphd+=vp0@6z#_^ogc"
 
 # DEBUG CONFIGURATION
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = []
 
 # MANAGER CONFIGURATION
