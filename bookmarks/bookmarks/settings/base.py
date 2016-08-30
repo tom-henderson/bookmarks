@@ -51,10 +51,10 @@ STATICFILES_DIRS = (
     os.path.join(CONFIG_ROOT, 'static'),
 )
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+#STATICFILES_FINDERS = (
+#    'django.contrib.staticfiles.finders.FileSystemFinder',
+#    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#)
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
