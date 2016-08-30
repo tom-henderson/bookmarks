@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^tag/(?P<slug>[^/]+)/$', BookmarkTagList.as_view(), name='tag'),
     url(r'^login/$', django.contrib.auth.views.login, name='log_in'),
     url(r'^logout/$', views.log_out, name='log_out'),
+    url(r'^admin/logout/$', views.log_out),
     url(r'^admin/', include(admin.site.urls)),
 ]
 
