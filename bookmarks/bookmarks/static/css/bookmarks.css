@@ -5,3 +5,7 @@ body { padding-top: 70px; }
     content: none;
   }
 }
+
+h4 small {
+    white-space: nowrap;
+}
