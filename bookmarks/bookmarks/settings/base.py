@@ -56,10 +56,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 # TEMPLATE CONFIGURATION
 TEMPLATES = [
     {
@@ -100,6 +96,7 @@ MIDDLEWARE_CLASSES = (
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # APP CONFIGURATION
+# Whitenoise must go here too so it loads before django.contrib.staticfiles
 DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,7 +113,6 @@ THIRD_PARTY_APPS = (
     'taggit_helpers',
 )
 
-TAGGIT_CASE_INSENSITIVE = True
 
 LOCAL_APPS = (
     'common',
@@ -124,3 +120,10 @@ LOCAL_APPS = (
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+# THIRD PARTY APP CONFIGURATION
+TAGGIT_CASE_INSENSITIVE = True
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
