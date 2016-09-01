@@ -12,7 +12,7 @@ class Bookmark(models.Model):
     date_added = models.DateTimeField(default=timezone.now, blank=True)
     tags = TaggableManager(blank=True)
     private = models.BooleanField(default=False)
-    url = models.URLField()
+    url = models.URLField(max_length=500)
 
     def __unicode__(self):
         return "{}: {} [{}]".format(
