@@ -20,9 +20,6 @@ class BookmarkAdmin(TaggitCounter, admin.ModelAdmin):
     ]
     ordering = ('-date_added',)
     search_fields = ('title', 'description')
-    exclude = [
-        'tag_import',
-    ]
 
     def get_queryset(self, request):
         return super(BookmarkAdmin, self).get_queryset(request).prefetch_related('tags')

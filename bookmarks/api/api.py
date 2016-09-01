@@ -16,7 +16,6 @@ class BookmarkSerializer(TaggitSerializer, serializers.ModelSerializer):
             'description',
             'date_added',
             'tags',
-            'tag_import',
             'private',
             'url',
         )

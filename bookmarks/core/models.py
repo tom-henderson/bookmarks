@@ -10,7 +10,6 @@ class Bookmark(models.Model):
     description = models.TextField(blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     tags = TaggableManager(blank=True)
-    tag_import = models.TextField(blank=True, null=True)
     private = models.BooleanField(default=False)
     url = models.URLField()
 
