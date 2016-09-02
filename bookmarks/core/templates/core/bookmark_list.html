@@ -18,7 +18,7 @@
         {% if bookmark.private %}<span class="label label-warning">private</span>{% endif %}
         {% for tag in bookmark.tags.all %}
           <a href="{% url 'tag' tag.slug %}" class="label label-default
-          {% if tag.slug == slug %}
+          {% if tag == tag_filter %}
             label-primary
           {% endif %}
           {% if search in tag.name %}

@@ -3,6 +3,7 @@ from django.views.generic import ListView
 from django.db.models import Q
 
 from .models import Bookmark
+from taggit.models import Tag
 
 
 class BookmarksList(ListView):
@@ -42,5 +43,5 @@ class BookmarkTagList(BookmarksList):
 
     def get_context_data(self, **kwargs):
         context = super(BookmarkTagList, self).get_context_data(**kwargs)
-        context['slug'] = self.kwargs.get('slug')
+        context['tag_filter'] = Tag.objects.get(slug=self.kwargs.get('slug'))
         return context

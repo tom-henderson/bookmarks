@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="{% url 'index' %}">📘 Bookmarks</a>
-      {% if slug %}<p class="navbar-text">{{slug}}</p>{% endif %}
+      {% if tag_filter %}<p class="navbar-text">{{tag_filter.name}}</p>{% endif %}
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,7 +51,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="{% url 'index' %}">📘 Bookmarks</a>
-      {% if slug %}<p class="navbar-text">{{slug}}</p>{% endif %}
+      {% if tag_filter %}<p class="navbar-text">{{tag_filter.name}}</p>{% endif %}
     </div>
   </div>
 
