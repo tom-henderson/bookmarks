@@ -32,7 +32,11 @@ class BookmarksList(ListView):
     def get_context_data(self, **kwargs):
         context = super(BookmarksList, self).get_context_data(**kwargs)
         context['title'] = "Bookmarks"
-        context['search'] = self.request.GET.get('search', None)
+
+        search = self.request.GET.get('search', None)
+        if search:
+            context['search'] = search
+
         return context
 
 
