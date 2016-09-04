@@ -21,7 +21,7 @@
           {% if tag == tag_filter %}
             label-primary
           {% endif %}
-          {% if search in tag.name %}
+          {% if search|lower in tag.name %}
             label-success
           {% endif %}
           ">{{tag.name}}</a> 
