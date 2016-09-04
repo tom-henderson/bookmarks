@@ -4,16 +4,6 @@
 {% load form_extras %}
 
 {% block content %}
-<div class="container" id="item-list">
-  <div class="row">
-    <div class="col-xs-12">
-      <h1>bookmarks</h1>
-      <h3>Edit {{ form.instance }}</h3>
-    </div>
-  </div>
-</div>
-
-
 
 <form class="container form-horizontal" role="form" method="post" action".">
   {% csrf_token %}

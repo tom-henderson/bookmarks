@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic import CreateView, UpdateView
 from django.db.models import Q
+from django import forms
 
 from .models import Bookmark
 from taggit.models import Tag
+from common.views import LoginRequiredMixin
+from common.forms import BootStrapForm
 
 
 class BookmarksList(ListView):
@@ -49,3 +53,20 @@ class BookmarkTagList(BookmarksList):
         context = super(BookmarkTagList, self).get_context_data(**kwargs)
         context['tag_filter'] = Tag.objects.get(slug=self.kwargs.get('slug'))
         return context
+
+
+class BookmarkForm(BootStrapForm):
+    class Meta:
+        model = Bookmark
+        fields = [
+            'title',
+            'description',
+            'url',
+            'tags',
+        ]
+
+
+class BookmarkCreate(LoginRequiredMixin, CreateView):
+    template_name = 'form_view.html'
+    form_class = BookmarkForm
+    success_url = "/"

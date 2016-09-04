@@ -22,6 +22,9 @@
             </div>
           </form> 
         </li>
+        <li>
+          <li><a href="{% url 'bookmark_create' %}">Add</a></li>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}
