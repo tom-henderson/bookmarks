@@ -19,9 +19,9 @@ class BookmarksList(ListView):
 
         if search:
             queryset = queryset.filter(
-                Q(tags__name__contains=search) |
-                Q(title__contains=search) |
-                Q(description__contains=search)
+                Q(tags__name__icontains=search) |
+                Q(title__icontains=search) |
+                Q(description__icontains=search)
             ).distinct()
 
         if not self.request.user.is_authenticated():
