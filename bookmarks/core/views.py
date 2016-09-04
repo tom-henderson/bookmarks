@@ -50,8 +50,11 @@ class BookmarkTagList(BookmarksList):
         return queryset.filter(tags__slug=self.kwargs.get('slug'))
 
     def get_context_data(self, **kwargs):
+        tag = Tag.objects.get(slug=self.kwargs.get('slug'))
+
         context = super(BookmarkTagList, self).get_context_data(**kwargs)
-        context['tag_filter'] = Tag.objects.get(slug=self.kwargs.get('slug'))
+        context['title'] = "Bookmarks - {}".format(tag.name)
+        context['tag_filter'] = tag.slug
         return context
 
 
