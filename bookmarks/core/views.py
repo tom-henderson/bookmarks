@@ -73,3 +73,11 @@ class BookmarkCreate(LoginRequiredMixin, CreateView):
     template_name = 'form_view.html'
     form_class = BookmarkForm
     success_url = "/"
+
+    def get_initial(self):
+        initial = {
+            'url': self.request.GET.get('url', None),
+            'title': self.request.GET.get('title', None),
+            'description': self.request.GET.get('description', None),
+        }
+        return initial
