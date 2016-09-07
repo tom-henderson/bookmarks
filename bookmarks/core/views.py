@@ -70,7 +70,7 @@ class BookmarkForm(BootStrapForm):
 
     def __init__(self, *args, **kwargs):
         super(BookmarkForm, self).__init__(*args, **kwargs)
-
+        # Use the bootstrap-tagsinput field:
         self.fields['tags'].widget.attrs['data-role'] = 'tagsinput'
 
 
