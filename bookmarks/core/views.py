@@ -68,6 +68,11 @@ class BookmarkForm(BootStrapForm):
             'tags',
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(BookmarkForm, self).__init__(*args, **kwargs)
+
+        self.fields['tags'].widget.attrs['data-role'] = 'tagsinput'
+
 
 class BookmarkCreate(LoginRequiredMixin, CreateView):
     template_name = 'form_view.html'
