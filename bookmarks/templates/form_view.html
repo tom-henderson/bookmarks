@@ -56,3 +56,23 @@
 </form>
 
 {% endblock %}
+
+{% block scripts %}
+<script>
+var tags = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  prefetch: '/api/tags/?format=json'
+});
+tags.initialize();
+
+$('input[data-role=tagsinput]').tagsinput({
+  typeaheadjs: {
+    displayKey: 'name',
+    valueKey: 'name',
+    source: tags.ttAdapter()
+  }
+});
+
+</script>
+{% endblock %}
