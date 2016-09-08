@@ -7,7 +7,7 @@ from django.conf import settings
 import views
 from core.views import BookmarksList, BookmarkTagList
 from core.views import BookmarkCreate
-from api.api import API_Bookmarks, API_RecentBookmarks
+from api.api import API_Bookmarks, API_RecentBookmarks, API_Tags
 import django.contrib.auth.views
 
 admin.autodiscover()
@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^new/$', BookmarkCreate.as_view(), name='bookmark_create'),
     url(r'^api/all/$', API_Bookmarks.as_view(), name='api_all'),
     url(r'^api/recent/$', API_RecentBookmarks.as_view(), name='api_recent'),
+    url(r'^api/tags/$', API_Tags.as_view(), name='api_tags'),
     url(r'^login/$', django.contrib.auth.views.login, name='log_in'),
     url(r'^logout/$', views.log_out, name='log_out'),
     url(r'^admin/logout/$', views.log_out),
