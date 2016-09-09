@@ -62,7 +62,10 @@
 var bloodhound = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
-  prefetch: '/api/tags/?format=json'
+  prefetch: {
+    url: '/api/tags/?format=json',
+    cache: false,
+  }
 });
 bloodhound.initialize();
 
