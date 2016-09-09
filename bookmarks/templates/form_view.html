@@ -59,18 +59,18 @@
 
 {% block scripts %}
 <script>
-var tags = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+var bloodhound = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   prefetch: '/api/tags/?format=json'
 });
-tags.initialize();
+bloodhound.initialize();
 
 $('input[data-role=tagsinput]').tagsinput({
   typeaheadjs: {
     displayKey: 'name',
     valueKey: 'name',
-    source: tags.ttAdapter()
+    source: bloodhound.ttAdapter()
   }
 });
 </script>
