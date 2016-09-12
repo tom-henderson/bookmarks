@@ -23,9 +23,8 @@
         </li>
 
         {% if user.is_authenticated %}
-          <li>
-            <li><a href="{% url 'bookmark_create' %}">Add</a></li>
-          </li>
+          <li><a href="{% url 'bookmark_create' %}">Add</a></li>
+          <li><a href="#" data-toggle="modal" data-target="#filter-form">Filter</a></li>
         {% endif %}
 
         {% if user.is_authenticated %}
