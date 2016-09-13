@@ -49,13 +49,13 @@
           <label class="col-sm-3 control-label" for="date-range-select">Date Added</label>
           <div class="col-sm-9 input-daterange input-group" id="date-added-range-select">
             <input type="text" class="form-control" name="date_added_from" placeholder="From" 
-              {% if date_added_range_start %}
-                value="{{date_added_range_start}}"
+              {% if date_added_from %}
+                value="{{date_added_from}}"
               {% endif %}>
             <span class="input-group-addon">to</span>
             <input type="text" class="form-control" name="date_added_to" placeholder="To" 
-              {% if date_added_range_end %}
-                value="{{date_added_range_end}}"
+              {% if date_added_to %}
+                value="{{date_added_to}}"
               {% endif %}>
           </div>
         </div>
