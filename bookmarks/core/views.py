@@ -20,6 +20,8 @@ class BookmarksList(ListView):
         queryset = super(BookmarksList, self).get_queryset()
 
         search = self.request.GET.get('search', None)
+        date_added_from = self.request.GET.get('date_added_from', None)
+        date_added_to = self.request.GET.get('date_added_to', None)
 
         if search:
             queryset = queryset.filter(
@@ -27,6 +29,12 @@ class BookmarksList(ListView):
                 Q(title__icontains=search) |
                 Q(description__icontains=search)
             ).distinct()
+
+        if date_added_from:
+            queryset = queryset.filter(date_added__gte=date_added_from)
+
+        if date_added_to:
+            queryset = queryset.filter(date_added__lte=date_added_to)
 
         if not self.request.user.is_authenticated():
             queryset = queryset.filter(private=False)
@@ -36,7 +44,12 @@ class BookmarksList(ListView):
     def get_context_data(self, **kwargs):
         context = super(BookmarksList, self).get_context_data(**kwargs)
         context['title'] = "Bookmarks"
+        context['date_added_from'] = self.request.GET.get('date_added_from', None)
+        context['date_added_to'] = self.request.GET.get('date_added_to', None)
 
+        # We only add search to context if it exists
+        # because otherwise using {% if search|lower in tag.name %}
+        # returns true for all tags.
         search = self.request.GET.get('search', None)
         if search:
             context['search'] = search

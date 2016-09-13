@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -34,4 +35,69 @@
   </div>  
 </div>
 
+
+<form action="" method="get" class="form-horizontal modal fade" id="filter-form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Filter</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="date-range-select">Date Added</label>
+          <div class="col-sm-9 input-daterange input-group" id="date-added-range-select">
+            <input type="text" class="form-control" name="date_added_from" placeholder="From" 
+              {% if date_added_from %}
+                value="{{date_added_from}}"
+              {% endif %}>
+            <span class="input-group-addon">to</span>
+            <input type="text" class="form-control" name="date_added_to" placeholder="To" 
+              {% if date_added_to %}
+                value="{{date_added_to}}"
+              {% endif %}>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="btn btn-default" data-dismiss="modal">Cancel</a>
+        <a id="reset" type="button" class="btn btn-default">Reset</a>
+        <button type="submit" class="btn btn-primary">Apply</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static "js/bootstrap-datepicker.js" %}"></script>
+<script language="javascript">
+  $(document).ready(function(){
+    $('#reset').on("click", function() {
+      $('#filter-form').find(':input').each(function() {
+          switch(this.type) {
+              case 'password':
+              case 'select-multiple':
+              case 'select-one':
+              case 'text':
+              case 'textarea':
+                  $(this).val('');
+                  break;
+              case 'checkbox':
+              case 'radio':
+                  this.checked = false;
+          }
+        });
+      });
+
+    var today = new Date();
+    $('#date-added-range-select').datepicker({
+      format: "yyyy-mm-dd",
+      endDate: today,
+    });
+  });
+</script>
 {% endblock %}
