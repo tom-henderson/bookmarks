@@ -57,6 +57,12 @@ $(document).ready(function(){
             },
             responsive: true,
             maintainAspectRatio: true,
+            onClick: function(event) {
+              elements = myChart.getElementAtEvent(event);
+              if (elements.length > 0) {
+                window.location = "/tag/" + elements[0]._model.label;
+              }
+            },
           }
         });
 
