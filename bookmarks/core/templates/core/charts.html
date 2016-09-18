@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-          <canvas id="myChart" style="padding-right: 30px;" width="400" height="200"></canvas>
+          <canvas id="top_tags" style="padding-right: 30px;" width="400" height="200"></canvas>
         </div>
     </div>
 </div>
@@ -19,40 +19,45 @@
 $(document).ready(function(){
 
     $.ajax({
-      url:"/api/all/?format=json",
+      url:"/api/tags/?format=json",
       crossDomain: false,
-      dataType: "jsonp",
+      dataType: "json",
       success: function (data) {
-        var records = data.results.collection1;
+
+        data.sort(function(a, b) {
+            return parseFloat(a.num_items) - parseFloat(b.num_items);
+        });
+        data.reverse();
 
         var chartData = {
           labels: [],
           datasets: [
             {
-              fillColor: "rgba(151,187,205,0.2)",
-              strokeColor: "rgba(151,187,205,1)",
-              pointColor: "rgba(151,187,205,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(151,187,205,1)",
+              label: 'Top Tags',
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1,
               data: []
             },
           ]
         };
 
         for (var i=0; i<20; i++) {
-          chartData.labels.push(records[i].date.text);
-          chartData.datasets[0].data.push(parseFloat(records[i].rate));
+          chartData.labels.push(data[i].name);
+          chartData.datasets[0].data.push(parseFloat(data[i].num_items));
         }
-        chartData.labels.reverse();
-        chartData.datasets[0].data.reverse();
 
-
-        var context = $("#myChart").get(0).getContext("2d");
-        var myChart = new Chart(context).Line(chartData, {
-          'responsive': true,
-          'maintainAspectRatio': true,
-          'bezierCurve': false,
+        var context = $("#top_tags").get(0).getContext("2d");
+        var myChart = new Chart(context, {
+          type: 'bar',
+          data: chartData,
+          options: {
+            legend: {
+              display: false,
+            },
+            responsive: true,
+            maintainAspectRatio: true,
+          }
         });
 
       },
