@@ -27,6 +27,7 @@
         {% endif %}
 
         <li><a href="#" data-toggle="modal" data-target="#filter-form">Filter</a></li>
+        <li><a href="{% url 'charts' %}">Charts</a></li>
 
         {% if user.is_authenticated %}
           <li class="dropdown">

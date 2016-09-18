@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import TemplateView, ListView
 from django.views.generic import CreateView, UpdateView
 from django.db.models import Q
 from django import forms
@@ -99,3 +99,7 @@ class BookmarkCreate(LoginRequiredMixin, CreateView):
             'description': self.request.GET.get('description', None),
         }
         return initial
+
+
+class Charts(TemplateView):
+    template_name = 'core/charts.html'
