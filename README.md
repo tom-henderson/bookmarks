@@ -1,16 +1,26 @@
 # Bookmarks
 
-## Convert imported tags to tags:
+Bookmark manager to replace del.icio.us.
 
-    from core.models import Bookmark
+## Libraries Used:
 
-    bookmarks = Bookmark.objects.all()
+### Django
+- [Django](https://www.djangoproject.com/)
+- [Django REST Framework](http://www.django-rest-framework.org/)
+- [dj-database-url](https://github.com/kennethreitz/dj-database-url)
+- [whitenoise](https://github.com/evansd/whitenoise)
+- [django-taggit](https://github.com/alex/django-taggit)
+- [django-taggit-helpers](https://github.com/mfcovington/django-taggit-helpers)
+- [django-taggit-serializer](https://github.com/glemmaPaul/django-taggit-serializer)
 
-    for b in bookmarks:
-        for tag in b.tag_import.split(','):
-            b.tags.add(tag.strip())
-
+### JavaScript
+- [bloodhound](https://github.com/twitter/typeahead.js)
+- [typeahead](https://github.com/twitter/typeahead.js)
+- [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker)
+- [bootstrap-tagsinput](https://github.com/bootstrap-tagsinput/bootstrap-tagsinput)
+- [chart.js](https://github.com/chartjs/Chart.js)
 
 ## Bookmarklet
-
-[Add Bookmark](javascript:(function($){url='http://127.0.0.1:8000/new/';url+='?url='+encodeURIComponent(window.location.href);url+='&title='+encodeURIComponent(document.title);url+='&description='+encodeURIComponent(''+(window.getSelection?window.getSelection():document.getSelection?document.getSelection():document.selection.createRange().text));window.open(url,"_self");})();)
+```
+javascript:(function($){url='http://127.0.0.1:8000/new/';url+='?url='+encodeURIComponent(window.location.href);url+='&title='+encodeURIComponent(document.title);url+='&description='+encodeURIComponent(''+(window.getSelection?window.getSelection():document.getSelection?document.getSelection():document.selection.createRange().text));window.open(url,"_self");})();
+```
