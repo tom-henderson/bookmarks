@@ -20,6 +20,9 @@ Bookmark manager to replace del.icio.us.
 - [bootstrap-tagsinput](https://github.com/bootstrap-tagsinput/bootstrap-tagsinput)
 - [chart.js](https://github.com/chartjs/Chart.js)
 
+### Integrations
+- Heroku Slack Webhooks
+
 ## Bookmarklet
 ```
 javascript:(function($){url='http://127.0.0.1:8000/new/';url+='?url='+encodeURIComponent(window.location.href);url+='&title='+encodeURIComponent(document.title);url+='&description='+encodeURIComponent(''+(window.getSelection?window.getSelection():document.getSelection?document.getSelection():document.selection.createRange().text));window.open(url,"_self");})();
