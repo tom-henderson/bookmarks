@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils import timezone
+from django.dispatch import receiver
 
 from taggit.managers import TaggableManager
 
@@ -20,3 +21,11 @@ class Bookmark(models.Model):
             self.title[:40],
             self.date_added
         )
+
+
+@receiver(models.signals.post_save, sender=Bookmark)
+def bookmark_pre_save_handler(sender, instance, created, *args, **kwargs):
+    # Only run for new items, not updates
+    if created:
+        # TODO: Webhook
+        return
