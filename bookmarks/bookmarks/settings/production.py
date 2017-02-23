@@ -53,3 +53,6 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     )
 }
+
+# SLACK INTEGRATION
+SLACK_WEBHOOK_URL = get_env_setting('SLACK_WEBHOOK_URL')
