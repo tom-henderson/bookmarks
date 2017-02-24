@@ -2,8 +2,12 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils import timezone
+from django.dispatch import receiver
+from django.conf import settings
 
 from taggit.managers import TaggableManager
+
+import requests
 
 
 class Bookmark(models.Model):
@@ -20,3 +24,31 @@ class Bookmark(models.Model):
             self.title[:40],
             self.date_added
         )
+
+
+@receiver(models.signals.post_save, sender=Bookmark)
+def bookmark_pre_save_handler(sender, instance, created, *args, **kwargs):
+    # Only run for new items, not updates
+    if created:
+        if not hasattr(settings, 'SLACK_WEBHOOK_URL'):
+            return
+
+        payload = {
+            'channel': "#bookmarks-dev",
+            'username': "Bookmarks",
+            'text': "{}".format(
+                "Bookmark added:",
+            ),
+            'icon_emoji': ":blue_book:",
+            'attachments': [
+                {
+                    "fallback": instance.title,
+                    "color": "good",
+                    "title": instance.title,
+                    "title_link": instance.url,
+                    "text": instance.description,
+                }
+            ]
+        }
+
+        requests.post(settings.SLACK_WEBHOOK_URL, json=payload)
