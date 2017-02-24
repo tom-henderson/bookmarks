@@ -7,6 +7,8 @@ from django.conf import settings
 
 from taggit.managers import TaggableManager
 
+import requests
+
 
 class Bookmark(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
@@ -28,28 +30,23 @@ class Bookmark(models.Model):
 def bookmark_pre_save_handler(sender, instance, created, *args, **kwargs):
     # Only run for new items, not updates
     if created:
-        if not settings.SLACK_WEBHOOK_URL:
+        if not hasattr(settings, 'SLACK_WEBHOOK_URL'):
             return
 
         payload = {
             'channel': "#bookmarks-dev",
             'username': "Bookmarks",
             'text': "{}".format(
-                "Text goes here",
+                "Bookmark added:",
             ),
             'icon_emoji': ":blue_book:",
             'attachments': [
                 {
-                    "fallback": "Required text summary.",
-                    "pretext": "<{}|{}>".format(instance.url, instance.title),
+                    "fallback": instance.title,
                     "color": "good",
-                    "fields": [
-                        {
-                            "title": instance.title,
-                            "value": instance.description,
-                            "short": "false"
-                        }
-                    ]
+                    "title": instance.title,
+                    "title_link": instance.url,
+                    "text": instance.description,
                 }
             ]
         }
