@@ -15,3 +15,5 @@ django-taggit-helpers==0.1.4
 # Taggit Serializer: Serializer for the Django REST Framework
 djangorestframework==3.4.6
 django-taggit-serializer==0.1.5
+
+requests==2.13.0
