@@ -10,6 +10,7 @@ build
 # SQLite3 database files:
 *.db
 *.sqlite3
+*.sqlite3.bak
 
 # Logs:
 *.log
