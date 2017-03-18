@@ -101,5 +101,12 @@ class BookmarkCreate(LoginRequiredMixin, CreateView):
         return initial
 
 
+class BookmarkUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'form_view.html'
+    model = Bookmark
+    form_class = BookmarkForm
+    success_url = "/"
+
+
 class Charts(TemplateView):
     template_name = 'core/charts.html'

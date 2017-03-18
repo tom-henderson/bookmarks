@@ -13,7 +13,7 @@
         <small>{{bookmark.date_added}}
         {% if user.is_staff %}
           <span class="admin-menu fade">
-          <a href="{% url 'admin:core_bookmark_change' bookmark.id %}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+          <a href="{% url 'bookmark_update' bookmark.id %}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
           </span>
         {% endif %}
         </small>
