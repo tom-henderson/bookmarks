@@ -4,35 +4,48 @@
 {% block content %}
 
 <div class="container">
-  <div class="row">
 
+  {% for bookmark in bookmarks %}
+  <div class="row bookmark">
     <div class="col-xs-12">
-
-      {% for bookmark in bookmarks %}
-        <h4><a href="{{bookmark.url}}">{{bookmark.title}}</a>
-        {% if bookmark.date_added %}
-          <small>{{bookmark.date_added}}</small>
-        {% endif %}</h4>
-        {% if bookmark.description %}
-          {{bookmark.description}}<br />
-        {%endif%}
-        {% if bookmark.private %}<span class="label label-warning">private</span>{% endif %}
-        {% for tag in bookmark.tags.all %}
-          <a href="{% url 'tag' tag.slug %}" class="label label-default
-          {% if tag.slug == tag_filter %}
-            label-primary
-          {% endif %}
-          {% if search|lower in tag.name %}
-            label-success
-          {% endif %}
-          ">{{tag.name}}</a> 
-        {% endfor %}
-        <br /><br />
+      <h4><a href="{{bookmark.url}}">{{bookmark.title}}</a>
+      {% if bookmark.date_added %}
+        <small>{{bookmark.date_added}}
+        {% if user.is_staff %}
+          <span class="admin-menu fade">
+          <a href="{% url 'admin:core_bookmark_change' bookmark.id %}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+          </span>
+        {% endif %}
+        </small>
+      {% endif %}
+      </h4>
+      {% if bookmark.description %}
+        <p>{{bookmark.description}}</p>
+      {%endif%}
+      {% if bookmark.private %}<span class="label label-warning">private</span>{% endif %}
+      {% for tag in bookmark.tags.all %}
+        <a href="{% url 'tag' tag.slug %}" class="label label-default
+        {% if tag.slug == tag_filter %}
+          label-primary
+        {% endif %}
+        {% if search|lower in tag.name %}
+          label-success
+        {% endif %}
+        ">{{tag.name}}</a> 
       {% endfor %}
+      <br /><br />
+    </div>
+  </div>  
+  {% endfor %}
 
+
+
+  <div class="row">
+    <div class="col-xs-12">
       {% include 'core/pagination-reverse.html' %}
     </div>
   </div>  
+
 </div>
 
 
@@ -78,26 +91,36 @@
   $(document).ready(function(){
     $('#reset').on("click", function() {
       $('#filter-form').find(':input').each(function() {
-          switch(this.type) {
-              case 'password':
-              case 'select-multiple':
-              case 'select-one':
-              case 'text':
-              case 'textarea':
-                  $(this).val('');
-                  break;
-              case 'checkbox':
-              case 'radio':
-                  this.checked = false;
-          }
-        });
+        switch(this.type) {
+            case 'password':
+            case 'select-multiple':
+            case 'select-one':
+            case 'text':
+            case 'textarea':
+                $(this).val('');
+                break;
+            case 'checkbox':
+            case 'radio':
+                this.checked = false;
+        }
       });
+    });
 
     var today = new Date();
     $('#date-added-range-select').datepicker({
       format: "yyyy-mm-dd",
       endDate: today,
     });
+
+    $(".bookmark").hover(
+      function () {
+        $(this).find('.admin-menu').removeClass('fade');
+      }, 
+      function () {
+        $(this).find('.admin-menu').addClass('fade');
+      }
+    );
+
   });
 </script>
 {% endblock %}
