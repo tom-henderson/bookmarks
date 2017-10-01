@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load template_extras %}
 
 {% block content %}
 
@@ -20,7 +21,7 @@
       {% endif %}
       </h4>
       {% if bookmark.description %}
-        <p>{{bookmark.description}}</p>
+        <p>{{bookmark.description | render_markdown}}</p>
       {%endif%}
       {% if bookmark.private %}<span class="label label-warning">private</span>{% endif %}
       {% for tag in bookmark.tags.all %}
