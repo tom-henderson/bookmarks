@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import FormView
 from django.views.generic import TemplateView, ListView
 from django.views.generic import CreateView, UpdateView
 from django.db.models import Q
@@ -89,13 +90,23 @@ class BookmarkForm(BootStrapForm):
         self.fields['tags'].widget.attrs['data-role'] = 'tagsinput'
 
 
-class BookmarkCreate(LoginRequiredMixin, CreateView):
+class BaseBookmarkFormView(FormView):
+    def get_initial(self):
+        initial = super(BaseBookmarkFormView, self).get_initial()
+
+        if self.request.GET.get('next'):
+            initial['next'] = self.request.GET.get('next')
+
+        return initial.copy()
+
+
+class BookmarkCreate(LoginRequiredMixin, BaseBookmarkFormView, CreateView):
     template_name = 'form_view.html'
     form_class = BookmarkForm
     success_url = "/"
 
 
-class BookmarkUpdate(LoginRequiredMixin, UpdateView):
+class BookmarkUpdate(LoginRequiredMixin, BaseBookmarkFormView, UpdateView):
     template_name = 'form_view.html'
     model = Bookmark
     form_class = BookmarkForm
