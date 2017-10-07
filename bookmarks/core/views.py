@@ -8,7 +8,7 @@ from django import forms
 from .models import Bookmark
 from taggit.models import Tag
 from common.views import LoginRequiredMixin
-from common.forms import BootStrapForm
+from common.forms import BootStrapForm, NextOnSuccessMixin
 
 
 class BookmarksList(ListView):
@@ -73,8 +73,6 @@ class BookmarkTagList(BookmarksList):
 
 
 class BookmarkForm(BootStrapForm):
-    next = forms.CharField(required=False)
-
     class Meta:
         model = Bookmark
         fields = [
@@ -90,27 +88,15 @@ class BookmarkForm(BootStrapForm):
         self.fields['tags'].widget.attrs['data-role'] = 'tagsinput'
 
 
-class BaseBookmarkFormView(FormView):
-    def get_initial(self):
-        initial = super(BaseBookmarkFormView, self).get_initial()
-
-        if self.request.GET.get('next'):
-            initial['next'] = self.request.GET.get('next')
-
-        return initial.copy()
-
-
-class BookmarkCreate(LoginRequiredMixin, BaseBookmarkFormView, CreateView):
+class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
     template_name = 'form_view.html'
     form_class = BookmarkForm
-    success_url = "/"
 
 
-class BookmarkUpdate(LoginRequiredMixin, BaseBookmarkFormView, UpdateView):
+class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
     template_name = 'form_view.html'
     model = Bookmark
     form_class = BookmarkForm
-    success_url = "/"
 
 
 class Charts(TemplateView):

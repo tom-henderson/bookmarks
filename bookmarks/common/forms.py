@@ -13,3 +13,12 @@ class BootStrapForm(forms.ModelForm):
             ]
             if type(self.fields[field].widget) not in checkbox_fields:
                 self.fields[field].widget.attrs['class'] = 'form-control'
+
+
+class NextOnSuccessMixin(object):
+    def get_success_url(self):
+        if self.request.GET.get('next'):
+            url = self.request.GET.get('next')
+        else:
+            url = super(NextOnSuccessMixin, self).get_success_url()
+        return url
