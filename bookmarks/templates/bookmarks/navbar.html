@@ -1,3 +1,5 @@
+{% load template_extras %}
+
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -23,7 +25,7 @@
         </li>
 
         {% if user.is_authenticated %}
-          <li><a href="{% url 'bookmark_create' %}">Add</a></li>
+          <li><a href="{% url 'bookmark_create' %}?{% url_replace request 'next' request.get_full_path %}">Add</a></li>
         {% endif %}
 
         <li><a href="#" data-toggle="modal" data-target="#filter-form">Filter</a></li>

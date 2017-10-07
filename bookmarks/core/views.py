@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import FormView
 from django.views.generic import TemplateView, ListView
 from django.views.generic import CreateView, UpdateView
 from django.db.models import Q
@@ -7,7 +8,7 @@ from django import forms
 from .models import Bookmark
 from taggit.models import Tag
 from common.views import LoginRequiredMixin
-from common.forms import BootStrapForm
+from common.forms import BootStrapForm, NextOnSuccessMixin
 
 
 class BookmarksList(ListView):
@@ -87,25 +88,15 @@ class BookmarkForm(BootStrapForm):
         self.fields['tags'].widget.attrs['data-role'] = 'tagsinput'
 
 
-class BookmarkCreate(LoginRequiredMixin, CreateView):
+class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
     template_name = 'form_view.html'
     form_class = BookmarkForm
-    success_url = "/"
-
-    def get_initial(self):
-        initial = {
-            'url': self.request.GET.get('url', None),
-            'title': self.request.GET.get('title', None),
-            'description': self.request.GET.get('description', None),
-        }
-        return initial
 
 
-class BookmarkUpdate(LoginRequiredMixin, UpdateView):
+class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
     template_name = 'form_view.html'
     model = Bookmark
     form_class = BookmarkForm
-    success_url = "/"
 
 
 class Charts(TemplateView):
