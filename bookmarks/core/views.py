@@ -91,6 +91,7 @@ class BookmarkForm(BootStrapForm):
 class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
     template_name = 'form_view.html'
     form_class = BookmarkForm
+    success_url = '/'
 
     def get_initial(self):
         initial = {
@@ -105,6 +106,7 @@ class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
     template_name = 'form_view.html'
     model = Bookmark
     form_class = BookmarkForm
+    success_url = '/'
 
 
 class Charts(TemplateView):
