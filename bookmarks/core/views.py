@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import FormView
 from django.views.generic import TemplateView, ListView
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from django.db.models import Q
 from django import forms
 
@@ -106,6 +106,11 @@ class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
     template_name = 'form_view.html'
     model = Bookmark
     form_class = BookmarkForm
+    success_url = '/'
+
+
+class BookmarkDelete(LoginRequiredMixin, NextOnSuccessMixin, DeleteView):
+    model = Bookmark
     success_url = '/'
 
 
