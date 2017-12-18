@@ -23,6 +23,9 @@ build
 .pydevproject
 .settings
 
+# VS Code
+.vscode
+
 # Linux Editors
 *~
 \#*\#
