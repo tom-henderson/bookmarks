@@ -27,3 +27,14 @@ Bookmark manager to replace del.icio.us.
 ```
 javascript:(function($){url='http://127.0.0.1:8000/new/';url+='?url='+encodeURIComponent(window.location.href);url+='&title='+encodeURIComponent(document.title);url+='&description='+encodeURIComponent(''+(window.getSelection?window.getSelection():document.getSelection?document.getSelection():document.selection.createRange().text));window.open(url,"_self");})();
 ```
+
+### Django 2.0
+
+Create python3 virtual environment
+
+```
+python3 -m venv <DIR>
+source <DIR>/bin/activate
+pip install -r requirements/local.txt
+python bookmarks/manage.py runserver
+```
