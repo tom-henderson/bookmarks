@@ -33,8 +33,8 @@ javascript:(function($){url='http://127.0.0.1:8000/new/';url+='?url='+encodeURIC
 Create python3 virtual environment
 
 ```
-python3 -m venv <DIR>
-source <DIR>/bin/activate
+python3 -m venv .env
+source .env/bin/activate
 pip install -r requirements/local.txt
 python bookmarks/manage.py runserver
 ```
