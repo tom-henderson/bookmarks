@@ -1,5 +1,4 @@
-Django==1.10
-Python>=2.7
+Django==2.0
 six==1.10.0
 
 # Whitenoise: Staticfile hosting
