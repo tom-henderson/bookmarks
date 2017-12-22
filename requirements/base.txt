@@ -1,4 +1,4 @@
-Django==2.0.1
+Django==2.0
 six==1.10.0
 
 # Whitenoise: Staticfile hosting
@@ -18,3 +18,5 @@ django-taggit-serializer==0.1.5
 requests==2.18.4
 
 markdown==2.6.10
+
+git+https://github.com/tom-henderson/django-common
