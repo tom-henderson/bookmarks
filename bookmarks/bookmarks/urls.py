@@ -3,8 +3,8 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.contrib import admin
 from django.conf import settings
+from django_common.views import LogOutRedirectView
 
-from . import views
 from core.views import BookmarksList, BookmarkTagList
 from core.views import BookmarkCreate, BookmarkUpdate
 from core.views import Charts
@@ -23,8 +23,8 @@ urlpatterns = [
     re_path(r'^api/recent/$', API_RecentBookmarks.as_view(), name='api_recent'),
     re_path(r'^api/tags/$', API_Tags.as_view(), name='api_tags'),
     re_path(r'^login/$', django.contrib.auth.views.login, name='log_in'),
-    re_path(r'^logout/$', views.log_out, name='log_out'),
-    re_path(r'^admin/logout/$', views.log_out),
+    re_path(r'^logout/$', LogOutRedirectView.as_view(), name='log_out'),
+    re_path(r'^admin/logout/$', LogOutRedirectView.as_view()),
     re_path(r'^admin/', admin.site.urls),
 
 ]
