@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0004_auto_20160901_2322'),
+        ('bookmarks', '0004_auto_20160901_2322'),
     ]
 
     operations = [

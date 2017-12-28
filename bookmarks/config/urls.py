@@ -5,9 +5,9 @@ from django.contrib import admin
 from django.conf import settings
 from django_common.views import LogOutRedirectView
 
-from core.views import BookmarksList, BookmarkTagList
-from core.views import BookmarkCreate, BookmarkUpdate
-from core.views import Charts
+from bookmarks.views import BookmarksList, BookmarkTagList
+from bookmarks.views import BookmarkCreate, BookmarkUpdate
+from bookmarks.views import Charts
 from api.api import API_Bookmarks, API_RecentBookmarks, API_Tags
 import django.contrib.auth.views
 
