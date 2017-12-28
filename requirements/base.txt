@@ -7,7 +7,7 @@ whitenoise==3.3.1
 # Tagging
 # Taggit Helpers: TaggitCounter, TaggitListFilter
 # Taggit Templatetags: Template tags for tags - https://github.com/feuervogel/django-taggit-templatetags
-django-taggit==0.22.1
+django-taggit==0.22.2
 django-taggit-helpers==0.1.4
 
 # Django REST Framework
