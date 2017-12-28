@@ -18,9 +18,6 @@ class Bookmark(models.Model):
     private = models.BooleanField(default=False)
     url = models.URLField(max_length=500)
 
-    class Meta:
-        db_table = 'core_bookmark'
-
     def __unicode__(self):
         return "{}: {} [{}]".format(
             self.pk,
