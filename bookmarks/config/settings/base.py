@@ -5,7 +5,6 @@ import os
 # Absolute filesystem path to the Django project directory:
 CONFIG_ROOT = os.path.dirname(os.path.dirname(__file__))
 DJANGO_ROOT = os.path.dirname(CONFIG_ROOT)
-
 PROJECT_ROOT = os.path.dirname(DJANGO_ROOT)
 
 SITE_NAME = os.path.basename(CONFIG_ROOT)
