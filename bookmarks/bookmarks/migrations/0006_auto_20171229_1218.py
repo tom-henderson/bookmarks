@@ -14,4 +14,8 @@ class Migration(migrations.Migration):
             name='bookmark',
             table=None,
         ),
+        migrations.RunSQL(
+            "UPDATE django_content_type SET app_label='bookmarks' WHERE app_label='core';",
+            "UPDATE django_content_type SET app_label='core' WHERE app_label='bookmarks';",
+        )
     ]
