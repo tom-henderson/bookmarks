@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 from django.conf import settings
 
-import views
+from . import views
 from core.views import BookmarksList, BookmarkTagList
 from core.views import BookmarkCreate, BookmarkUpdate
 from core.views import Charts
