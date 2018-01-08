@@ -1,9 +1,6 @@
 # Python bytecode:
 *.py[co]
 
-# Python venv
-.env/*
-
 # Packaging files:
 *.egg*
 
@@ -22,9 +19,6 @@ build
 .project
 .pydevproject
 .settings
-
-# VS Code
-.vscode
 
 # Linux Editors
 *~
