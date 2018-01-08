@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.core.management.base import BaseCommand, CommandError
-from bookmarks.models import Bookmark
+from core.models import Bookmark
 
 import json
 

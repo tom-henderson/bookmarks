@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from rest_framework.generics import ListAPIView
-from taggit_serializer.serializers import TagListSerializerField, TaggitSerializer
+from taggit_serializer.serializers import (TagListSerializerField,
+                                           TaggitSerializer)
 from django.db.models import Count
-from bookmarks.models import Bookmark
+from core.models import Bookmark
 from taggit.models import Tag
 
 
