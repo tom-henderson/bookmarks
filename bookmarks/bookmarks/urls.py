@@ -1,6 +1,5 @@
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
 from django.contrib import admin
 from django.conf import settings
 
@@ -14,18 +13,18 @@ import django.contrib.auth.views
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', BookmarksList.as_view(), name='index'),
-    url(r'^tag/(?P<slug>[^/]+)/$', BookmarkTagList.as_view(), name='tag'),
-    url(r'^new/$', BookmarkCreate.as_view(), name='bookmark_create'),
-    url(r'^edit/(?P<pk>\d+)/$', BookmarkUpdate.as_view(), name='bookmark_update'),
-    url(r'^charts/$', Charts.as_view(), name='charts'),
-    url(r'^api/all/$', API_Bookmarks.as_view(), name='api_all'),
-    url(r'^api/recent/$', API_RecentBookmarks.as_view(), name='api_recent'),
-    url(r'^api/tags/$', API_Tags.as_view(), name='api_tags'),
-    url(r'^login/$', django.contrib.auth.views.login, name='log_in'),
-    url(r'^logout/$', views.log_out, name='log_out'),
-    url(r'^admin/logout/$', views.log_out),
-    url(r'^admin/', include(admin.site.urls)),
+    re_path(r'^$', BookmarksList.as_view(), name='index'),
+    re_path(r'^tag/(?P<slug>[^/]+)/$', BookmarkTagList.as_view(), name='tag'),
+    re_path(r'^new/$', BookmarkCreate.as_view(), name='bookmark_create'),
+    re_path(r'^edit/(?P<pk>\d+)/$', BookmarkUpdate.as_view(), name='bookmark_update'),
+    re_path(r'^charts/$', Charts.as_view(), name='charts'),
+    re_path(r'^api/all/$', API_Bookmarks.as_view(), name='api_all'),
+    re_path(r'^api/recent/$', API_RecentBookmarks.as_view(), name='api_recent'),
+    re_path(r'^api/tags/$', API_Tags.as_view(), name='api_tags'),
+    re_path(r'^login/$', django.contrib.auth.views.login, name='log_in'),
+    re_path(r'^logout/$', views.log_out, name='log_out'),
+    re_path(r'^admin/logout/$', views.log_out),
+    re_path(r'^admin/', admin.site.urls),
 
 ]
 
