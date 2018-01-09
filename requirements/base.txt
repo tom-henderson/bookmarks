@@ -1,20 +1,21 @@
 Django==1.10
 six==1.10.0
+sqlparse==0.2.4
 
 # Whitenoise: Staticfile hosting
-whitenoise==3.2.1
+whitenoise==3.3.1
 
 # Tagging
 # Taggit Helpers: TaggitCounter, TaggitListFilter
 # Taggit Templatetags: Template tags for tags - https://github.com/feuervogel/django-taggit-templatetags
-django-taggit==0.21.1
+django-taggit==0.22.2
 django-taggit-helpers==0.1.4
 
 # Django REST Framework
 # Taggit Serializer: Serializer for the Django REST Framework
-djangorestframework==3.4.6
+djangorestframework==3.7.3
 django-taggit-serializer==0.1.5
 
-requests==2.13.0
+requests==2.18.4
 
-markdown==2.6.9
+markdown==2.6.10
