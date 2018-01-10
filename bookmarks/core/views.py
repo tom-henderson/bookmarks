@@ -7,8 +7,8 @@ from django import forms
 
 from .models import Bookmark
 from taggit.models import Tag
-from common.views import LoginRequiredMixin
-from common.forms import BootStrapForm, NextOnSuccessMixin
+from django_common.views import LoginRequiredMixin
+from django_common.forms import BootStrapForm, NextOnSuccessMixin
 
 
 class BookmarksList(ListView):
