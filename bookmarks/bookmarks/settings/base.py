@@ -5,7 +5,6 @@ import os
 # Absolute filesystem path to the Django project directory:
 CONFIG_ROOT = os.path.dirname(os.path.dirname(__file__))
 DJANGO_ROOT = os.path.dirname(CONFIG_ROOT)
-
 PROJECT_ROOT = os.path.dirname(DJANGO_ROOT)
 
 SITE_NAME = os.path.basename(DJANGO_ROOT)
@@ -47,9 +46,6 @@ MEDIA_URL = '/media/'
 # STATIC FILE CONFIGURATION
 STATIC_ROOT = os.path.join(DJANGO_ROOT, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(CONFIG_ROOT, 'static'),
-)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
