@@ -82,7 +82,7 @@ TEMPLATES = [
 ]
 
 # MIDDLEWARE CONFIGURATION
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     # Default Django middleware.
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

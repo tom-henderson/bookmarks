@@ -37,7 +37,7 @@ class BookmarksList(ListView):
         if date_added_to:
             queryset = queryset.filter(date_added__lte=date_added_to)
 
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             queryset = queryset.filter(private=False)
 
         return queryset.prefetch_related('tags')
