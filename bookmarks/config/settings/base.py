@@ -7,7 +7,7 @@ CONFIG_ROOT = os.path.dirname(os.path.dirname(__file__))
 DJANGO_ROOT = os.path.dirname(CONFIG_ROOT)
 PROJECT_ROOT = os.path.dirname(DJANGO_ROOT)
 
-SITE_NAME = os.path.basename(DJANGO_ROOT)
+SITE_NAME = os.path.basename(CONFIG_ROOT)
 
 # SECRET CONFIGURATION
 # Note: This key should only be used for development and testing.
