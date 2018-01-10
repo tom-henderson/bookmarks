@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView
 from taggit_serializer.serializers import (TagListSerializerField,
                                            TaggitSerializer)
 from django.db.models import Count
-from core.models import Bookmark
+from bookmarks.models import Bookmark
 from taggit.models import Tag
 
 
