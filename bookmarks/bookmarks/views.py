@@ -110,4 +110,4 @@ class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
 
 
 class Charts(TemplateView):
-    template_name = 'core/charts.html'
+    template_name = 'bookmarks/charts.html'
