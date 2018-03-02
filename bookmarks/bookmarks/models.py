@@ -36,19 +36,13 @@ def bookmark_pre_save_handler(sender, instance, created, *args, **kwargs):
         payload = {
             'channel': "#bookmarks-dev",
             'username': "Bookmarks",
-            'text': "{}".format(
-                "Bookmark added:",
+            'text': "<{}|{}>\n{}".format(
+                instance.url,
+                instance.title,
+                instance.description,
             ),
             'icon_emoji': ":blue_book:",
-            'attachments': [
-                {
-                    "fallback": instance.title,
-                    "color": "good",
-                    "title": instance.title,
-                    "title_link": instance.url,
-                    "text": instance.description,
-                }
-            ]
+            'unfurl_links': True
         }
 
         requests.post(settings.SLACK_WEBHOOK_URL, json=payload)
