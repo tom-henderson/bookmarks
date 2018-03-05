@@ -2,19 +2,6 @@
 from .base import *
 import dj_database_url
 
-# Normally you should not import ANYTHING from Django directly
-# into your settings, but ImproperlyConfigured is an exception.
-from django.core.exceptions import ImproperlyConfigured
-
-
-def get_env_setting(setting):
-    """ Get the environment setting or return exception """
-    try:
-        return os.environ[setting]
-    except KeyError:
-        error_msg = "Set the %s env variable" % setting
-        raise ImproperlyConfigured(error_msg)
-
 
 # SECRET CONFIGURATION
 SECRET_KEY = get_env_setting('SECRET_KEY')
