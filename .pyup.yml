@@ -1,0 +1,9 @@
+# https://pyup.io/docs/bot/config/
+
+update: all
+pin: True
+branch: master
+search: True
+
+label_prs: update
+branch_prefix: pyup-
