@@ -16,7 +16,7 @@ django-taggit-helpers==0.1.4
 djangorestframework==3.9.0
 django-taggit-serializer==0.1.7
 
-requests==2.20.0
+requests==2.20.1
 
 markdown==2.6.10
 
