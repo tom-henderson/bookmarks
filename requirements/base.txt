@@ -3,7 +3,7 @@ six==1.11.0
 sqlparse==0.2.4
 
 # Whitenoise: Staticfile hosting
-whitenoise==4.1
+whitenoise==4.1.1
 
 # Tagging
 # Taggit Helpers: TaggitCounter, TaggitListFilter
