@@ -2,6 +2,10 @@
 
 Bookmark manager to replace del.icio.us.
 
+[![Updates](https://pyup.io/repos/github/tom-henderson/bookmarks/shield.svg)](https://pyup.io/repos/github/tom-henderson/bookmarks/)
+[![Python 3](https://pyup.io/repos/github/tom-henderson/bookmarks/python-3-shield.svg)](https://pyup.io/repos/github/tom-henderson/bookmarks/)
+
+
 ## Libraries Used:
 
 ### Django
