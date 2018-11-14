@@ -5,8 +5,6 @@ from django.contrib.auth.views import LoginView
 from django.conf import settings
 from django_common.views import LogOutRedirectView
 
-import django.contrib.auth.views
-
 admin.autodiscover()
 
 urlpatterns = [
