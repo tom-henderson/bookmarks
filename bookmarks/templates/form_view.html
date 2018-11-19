@@ -70,6 +70,9 @@ var bloodhound = new Bloodhound({
 bloodhound.initialize();
 
 $('input[data-role=tagsinput]').tagsinput({
+  tagClass: function(item) {
+    return 'label label-primary';
+  },
   typeaheadjs: {
     displayKey: 'name',
     valueKey: 'name',
