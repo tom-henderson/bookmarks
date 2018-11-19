@@ -4,7 +4,6 @@
   "description": "Bookmarks manager.",
   "main": "index.js",
   "dependencies": {
-    "bloodhound-js": "^1.0.0",
     "bootstrap": "^3.3.7",
     "bootstrap-datepicker": "^1.7.1",
     "bootstrap-tagsinput": "^0.7.1",

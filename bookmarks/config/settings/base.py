@@ -145,7 +145,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 NPM_ROOT_PATH = PROJECT_ROOT
 NPM_STATIC_FILES_PREFIX = 'npm'
 NPM_FILE_PATTERNS = {
-    'bloodhound-js': ['dist/*'],
     'bootstrap': ['dist/*'],
     'bootstrap-datepicker': ['dist/*'],
     'bootstrap-tagsinput': ['dist/*'],
