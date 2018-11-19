@@ -4,6 +4,7 @@ sqlparse==0.2.4
 
 # Whitenoise: Staticfile hosting
 whitenoise==4.1.2
+django-npm==1.0.0
 
 # Tagging
 # Taggit Helpers: TaggitCounter, TaggitListFilter
@@ -15,9 +16,6 @@ django-taggit-helpers==0.1.4
 # Taggit Serializer: Serializer for the Django REST Framework
 djangorestframework==3.9.0
 django-taggit-serializer==0.1.7
-
-# Staticfiles
-django-npm==1.0.0
 
 requests==2.20.1
 
