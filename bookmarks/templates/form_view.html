@@ -79,5 +79,8 @@ $('input[data-role=tagsinput]').tagsinput({
     source: bloodhound.ttAdapter()
   }
 });
+
+$('input[data-role=tagsinput]').siblings(".bootstrap-tagsinput").addClass('form-control');
+
 </script>
 {% endblock %}
