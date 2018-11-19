@@ -68,6 +68,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'npm.finders.NpmFinder',
 )
 
 # TEMPLATE CONFIGURATION
@@ -141,3 +142,14 @@ TAGGIT_CASE_INSENSITIVE = True
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+NPM_ROOT_PATH = PROJECT_ROOT
+NPM_FILE_PATTERNS = {
+    'bloodhound': ['index.js'],
+    'bootstrap': ['dist/*'],
+    'bootstrap-datepicker': ['dist/*'],
+    'bootstrap-tagsinput': ['dist/*'],
+    'chart.js': ['dist/Chart.bundle.min.js'],
+    'font-awesome': ['css/*', 'fonts/*'],
+    'jquery': ['dist/*'],
+    'typeahead': ['typeahead.js', 'style.css'],
+}
