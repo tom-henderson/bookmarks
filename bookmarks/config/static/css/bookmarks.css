@@ -59,3 +59,9 @@ h4 small {
   outline: 0;
   background-color: #428bca;
 }
+
+.input-daterange {
+    width: 75%;
+    padding-left: 15%;
+    padding-right: 15%;
+}
