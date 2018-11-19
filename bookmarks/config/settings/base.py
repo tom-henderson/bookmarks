@@ -143,6 +143,7 @@ TAGGIT_CASE_INSENSITIVE = True
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 NPM_ROOT_PATH = PROJECT_ROOT
+NPM_STATIC_FILES_PREFIX = 'npm'
 NPM_FILE_PATTERNS = {
     'bloodhound': ['index.js'],
     'bootstrap': ['dist/*'],
