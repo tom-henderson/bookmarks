@@ -39,7 +39,7 @@
               {% else %}{{ user.username }}{% endif %}
               &nbsp;<b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
               {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">Admin</a></li>{% endif %}
               <li><a href="{% url 'log_out' %}">Log Out</a></li>
             </ul>
