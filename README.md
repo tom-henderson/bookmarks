@@ -16,6 +16,7 @@ Bookmark manager to replace del.icio.us.
 - [django-taggit](https://github.com/alex/django-taggit)
 - [django-taggit-helpers](https://github.com/mfcovington/django-taggit-helpers)
 - [django-taggit-serializer](https://github.com/glemmaPaul/django-taggit-serializer)
+- [django-npm](https://github.com/kevin1024/django-npm)
 
 ### JavaScript
 - [bloodhound](https://github.com/twitter/typeahead.js)
@@ -40,6 +41,8 @@ Create python3 virtual environment
 python3 -m venv .env
 source .env/bin/activate
 pip install -r requirements/local.txt
+npm install
 python bookmarks/manage.py migrate
+python bookmarks/manage.py collectstatic
 python bookmarks/manage.py runserver
 ```
