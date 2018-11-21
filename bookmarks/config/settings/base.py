@@ -145,11 +145,31 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 NPM_ROOT_PATH = PROJECT_ROOT
 NPM_STATIC_FILES_PREFIX = 'npm'
 NPM_FILE_PATTERNS = {
-    'bootstrap': ['dist/*'],
-    'bootstrap-datepicker': ['dist/*'],
-    'bootstrap-tagsinput': ['dist/*'],
-    'chart.js': ['dist/Chart.bundle.min.js'],
-    'font-awesome': ['css/*', 'fonts/*'],
-    'jquery': ['dist/*'],
-    'typeahead.js': ['dist/*'],
+    'bootstrap': [
+        'dist/css/*.min.*',
+        'dist/fonts/*',
+        'dist/js/*.min.*',
+    ],
+    'bootstrap-datepicker': [
+        'dist/css/*.min.*',
+        'dist/js/*.min.*',
+        'dist/locales/*',
+    ],
+    'bootstrap-tagsinput': [
+        'dist/*.min.*',
+        'dist/*.css',
+    ],
+    'chart.js': [
+        'dist/Chart.bundle.min.js'
+    ],
+    'font-awesome': [
+        'css/*.min.*',
+        'fonts/*',
+    ],
+    'jquery': [
+        'dist/jquery.min.js',
+    ],
+    'typeahead.js': [
+        'dist/typeahead.bundle.min.js',
+    ],
 }
