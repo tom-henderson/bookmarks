@@ -5,7 +5,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "bootstrap-datepicker": "^1.7.1",
-    "bootstrap-tagsinput": "^0.7.1",
+    "@adactive/bootstrap-tagsinput": "^0.8.2",
     "chart.js": "^2.7.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
