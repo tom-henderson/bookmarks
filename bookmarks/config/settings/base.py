@@ -155,9 +155,9 @@ NPM_FILE_PATTERNS = {
         'dist/js/*.min.*',
         'dist/locales/*',
     ],
-    '@adactive/bootstrap-tagsinput': [
-        'dist/*.min.*',
-        'dist/*.css',
+    'bootstrap-tokenfield': [
+        'dist/*.min.js',
+        'dist/css/*.min.css',
     ],
     'chart.js': [
         'dist/Chart.bundle.min.js'
