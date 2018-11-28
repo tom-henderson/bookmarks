@@ -18,6 +18,9 @@ build
 # Logs:
 *.log
 
+# Node Modules
+node_modules
+
 # Eclipse
 .project
 .pydevproject
@@ -49,3 +52,6 @@ tramp
 # Windows
 Thumbs.db
 Desktop.ini
+
+# Staticfiles
+bookmarks/static
