@@ -37,10 +37,10 @@ javascript:(function($){url='http://127.0.0.1:8000/new/';url+='?url='+encodeURIC
 Create python3 virtual environment
 
 ```
+npm install
 python3 -m venv .env
 source .env/bin/activate
 pip install -r requirements/local.txt
-npm install
 python bookmarks/manage.py migrate
 python bookmarks/manage.py collectstatic
 python bookmarks/manage.py runserver
