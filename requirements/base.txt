@@ -4,6 +4,7 @@ sqlparse==0.2.4
 
 # Whitenoise: Staticfile hosting
 whitenoise==4.1.2
+django-npm==1.0.0
 
 # Tagging
 # Taggit Helpers: TaggitCounter, TaggitListFilter

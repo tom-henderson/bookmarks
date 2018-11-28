@@ -59,3 +59,13 @@ h4 small {
   outline: 0;
   background-color: #428bca;
 }
+
+.input-daterange[class*=col-] {
+    width: 75%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+a.tag.label-default {
+    background-color: #999;
+}

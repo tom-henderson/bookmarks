@@ -16,12 +16,12 @@ Bookmark manager to replace del.icio.us.
 - [django-taggit](https://github.com/alex/django-taggit)
 - [django-taggit-helpers](https://github.com/mfcovington/django-taggit-helpers)
 - [django-taggit-serializer](https://github.com/glemmaPaul/django-taggit-serializer)
+- [django-npm](https://github.com/kevin1024/django-npm)
 
 ### JavaScript
-- [bloodhound](https://github.com/twitter/typeahead.js)
 - [typeahead](https://github.com/twitter/typeahead.js)
 - [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker)
-- [bootstrap-tagsinput](https://github.com/bootstrap-tagsinput/bootstrap-tagsinput)
+- [bootstrap-tokenfield](https://github.com/sliptree/bootstrap-tokenfield)
 - [chart.js](https://github.com/chartjs/Chart.js)
 
 ### Integrations
@@ -37,9 +37,11 @@ javascript:(function($){url='http://127.0.0.1:8000/new/';url+='?url='+encodeURIC
 Create python3 virtual environment
 
 ```
+npm install
 python3 -m venv .env
 source .env/bin/activate
 pip install -r requirements/local.txt
 python bookmarks/manage.py migrate
+python bookmarks/manage.py collectstatic
 python bookmarks/manage.py runserver
 ```

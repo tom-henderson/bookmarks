@@ -69,11 +69,8 @@ var bloodhound = new Bloodhound({
 });
 bloodhound.initialize();
 
-$('input[data-role=tagsinput]').tagsinput({
-  tagClass: function(item) {
-    return 'label label-primary';
-  },
-  typeaheadjs: {
+$('input[data-role=tagsinput]').tokenfield({
+  typeahead: {
     displayKey: 'name',
     valueKey: 'name',
     source: bloodhound.ttAdapter()

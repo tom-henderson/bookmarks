@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static "js/Chart.bundle.min.js" %}"></script>
+<script src="{% static 'npm/chart.js/dist/Chart.bundle.min.js' %}"></script>
 <script language="javascript">
 $(document).ready(function(){
 
@@ -43,7 +43,7 @@ $(document).ready(function(){
           ]
         };
 
-        for (var i=0; i<20; i++) {
+        for (var i=0; i < Math.min(20, data.length); i++) {
           chartData.labels.push(data[i].name);
           chartData.datasets[0].data.push(parseFloat(data[i].num_items));
         }
