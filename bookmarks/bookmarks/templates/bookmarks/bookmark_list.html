@@ -25,12 +25,13 @@
       {%endif%}
       {% if bookmark.private %}<span class="label label-warning">private</span>{% endif %}
       {% for tag in bookmark.tags.all %}
-        <a href="{% url 'tag' tag.slug %}" class="label label-default
+        <a href="{% url 'tag' tag.slug %}" class="tag label
         {% if tag.slug == tag_filter %}
           label-primary
-        {% endif %}
-        {% if search|lower in tag.name %}
+        {% elif search|lower in tag.name %}
           label-success
+        {% else %}
+          label-default
         {% endif %}
         ">{{tag.name}}</a> 
       {% endfor %}

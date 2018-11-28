@@ -65,3 +65,7 @@ h4 small {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+a.tag.label-default {
+    background-color: #999;
+}
