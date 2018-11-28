@@ -19,10 +19,9 @@ Bookmark manager to replace del.icio.us.
 - [django-npm](https://github.com/kevin1024/django-npm)
 
 ### JavaScript
-- [bloodhound](https://github.com/twitter/typeahead.js)
 - [typeahead](https://github.com/twitter/typeahead.js)
 - [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker)
-- [bootstrap-tagsinput](https://github.com/bootstrap-tagsinput/bootstrap-tagsinput)
+- [bootstrap-tokenfield](https://github.com/sliptree/bootstrap-tokenfield)
 - [chart.js](https://github.com/chartjs/Chart.js)
 
 ### Integrations
