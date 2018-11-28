@@ -60,8 +60,8 @@ h4 small {
   background-color: #428bca;
 }
 
-.input-daterange {
+.input-daterange[class*=col-] {
     width: 75%;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
