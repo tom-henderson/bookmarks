@@ -1,4 +1,4 @@
-Django==2.2.4
+Django==2.2.5
 six==1.12.0
 sqlparse==0.3.0
 
