@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
 
 from taggit_helpers.admin import TaggitCounter, TaggitListFilter
 
@@ -31,8 +32,7 @@ class BookmarkAdmin(TaggitCounter, admin.ModelAdmin):
         return u", ".join(o.name for o in obj.tags.all())
 
     def link(self, obj):
-        return u"<a href='{}'>\U0001F517</a>".format(obj.url)
-    link.allow_tags = True
+        return mark_safe(f"<a href='{obj.url}'>\U0001F517</a>")
 
 
 admin.site.register(Bookmark, BookmarkAdmin)
