@@ -3,7 +3,7 @@ six==1.12.0
 sqlparse==0.3.0
 
 # Whitenoise: Staticfile hosting
-whitenoise==4.1.3
+whitenoise==4.1.4
 django-npm==1.0.0
 
 # Tagging
