@@ -19,6 +19,6 @@ django-taggit-serializer==0.1.7
 
 requests==2.25.1
 
-markdown==3.3.3
+markdown==3.3.4
 
 git+https://github.com/tom-henderson/django-common
