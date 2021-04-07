@@ -49,6 +49,8 @@ USE_L10N = True
 SITE_ID = 1
 WSGI_APPLICATION = '{}.wsgi.application'.format(SITE_NAME)
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # URL CONFIGURATION
 ROOT_URLCONF = '{}.urls'.format(SITE_NAME)
 LOGIN_URL = '/login/'
