@@ -42,6 +42,11 @@ class API_Bookmarks(ListAPIView):
 class API_RecentBookmarks(ListAPIView):
     queryset = Bookmark.objects.filter(private=False).order_by('-date_added')[:10]
     serializer_class = BookmarkSerializer
+    
+    def get(self, *args, **kwargs):
+        response = super().get(*args, **kwargs)
+        response['Access-Control-Allow-Origin'] = "*"
+        return response
 
 
 class API_Tags(ListAPIView):
