@@ -16,7 +16,6 @@ Bookmark manager to replace del.icio.us.
 - [whitenoise](https://github.com/evansd/whitenoise)
 - [django-taggit](https://github.com/alex/django-taggit)
 - [django-taggit-helpers](https://github.com/mfcovington/django-taggit-helpers)
-- [django-taggit-serializer](https://github.com/glemmaPaul/django-taggit-serializer)
 - [django-npm](https://github.com/kevin1024/django-npm)
 
 ### JavaScript
