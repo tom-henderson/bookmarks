@@ -127,7 +127,6 @@ THIRD_PARTY_APPS = (
     'taggit',
     'taggit_helpers',
     'rest_framework',
-    'taggit_serializer',
     'django_common',
 )
 
