@@ -15,7 +15,7 @@ django-taggit-helpers==0.1.4
 # Django REST Framework
 djangorestframework==3.12.4
 
-requests==2.25.1
+requests==2.26.0
 
 markdown==3.3.4
 
