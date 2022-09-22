@@ -45,4 +45,7 @@ def bookmark_pre_save_handler(sender, instance, created, *args, **kwargs):
             'unfurl_links': True
         }
 
-        requests.post(settings.SLACK_WEBHOOK_URL, json=payload)
+        try:
+            requests.post(settings.SLACK_WEBHOOK_URL, json=payload)
+        except:
+            return
