@@ -174,3 +174,14 @@ NPM_FILE_PATTERNS = {
         'dist/typeahead.bundle.min.js',
     ],
 }
+
+# DATABASE CONFIGURATION
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': get_env_setting(
+            'SQLITE_DATABASE_PATH',
+            default=os.path.join(DJANGO_ROOT, 'db.sqlite3')
+        ),
+    }
+}

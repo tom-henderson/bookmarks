@@ -5,20 +5,10 @@ from .base import *
 # DEBUG CONFIGURATION
 DEBUG = True
 INTERNAL_IPS = ('127.0.0.1',)
+ALLOWED_HOSTS = ['*']
 
 # EMAIL CONFIGURATION
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# DATABASE CONFIGURATION
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': get_env_setting(
-            'SQLITE_DATABASE_PATH',
-            default=os.path.join(DJANGO_ROOT, 'db.sqlite3')
-        ),
-    }
-}
 
 # CACHE CONFIGURATION
 CACHES = {
