@@ -7,7 +7,7 @@ COPY requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
 # Fetch node modules
-FROM node:latest as node
+FROM node:18-bullseye-slim as node
 COPY package.json /package.json
 RUN npm install
 
