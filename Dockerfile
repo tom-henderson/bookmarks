@@ -1,10 +1,11 @@
 # Base image with python dependencies
 FROM python:3.10-slim-bullseye as base
 RUN apt-get update && \
-    apt-get -y install \
-        git
+    apt-get -y --no-install-recommends install \
+        git && \
+    rm -rf /var/lib/apt/lists/*
 COPY requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
 # Fetch node modules
 FROM node:18-bullseye-slim as node
