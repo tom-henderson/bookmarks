@@ -185,3 +185,42 @@ DATABASES = {
         ),
     }
 }
+
+# LOGGING CONFIGURATION
+LOG_LEVEL = get_env_setting('LOG_LEVEL', default='INFO')
+DB_LOG_LEVEL = get_env_setting('DB_LOG_LEVEL', default='INFO')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'level': LOG_LEVEL,
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'level': DB_LOG_LEVEL,
+            'handlers': ['console'],
+        },
+    }
+}
