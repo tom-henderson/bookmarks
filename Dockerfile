@@ -1,5 +1,7 @@
 # Base image with python dependencies
 FROM python:3.10-slim-bullseye as base
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 RUN apt-get update && \
     apt-get -y --no-install-recommends install \
         git && \
