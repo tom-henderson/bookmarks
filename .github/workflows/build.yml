@@ -31,11 +31,6 @@ jobs:
           echo "RUN_NUMBER=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
           echo "VERSION=${{ env.BASE_VERSION }}.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
 
-      - name: Tag Release
-        uses: ./.github/actions/tag-release
-        with:
-          tag: "${{ env.IMAGE_NAME }}-${{ env.VERSION }}"
-
       - name: Docker Build
         env:
           IMAGE_ID: "docker.pkg.github.com/${{ github.repository }}/${{ env.IMAGE_NAME }}"
@@ -45,6 +40,11 @@ jobs:
             -t ${IMAGE_ID}:latest .
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
           docker push ${IMAGE_ID}:${VERSION}
+
+      - name: Tag Release
+        uses: ./.github/actions/tag-release
+        with:
+          tag: "${{ env.IMAGE_NAME }}-${{ env.VERSION }}"
 
       - name: Build Failed
         if: ${{ failure() }}
