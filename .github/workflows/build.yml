@@ -44,12 +44,12 @@ jobs:
       - name: Tag Release
         uses: ./.github/actions/tag-release
         with:
-          tag: "${{ env.IMAGE_NAME }}-${{ env.VERSION }}"
+          tag: "${{ env.VERSION }}"
 
       - name: Build Failed
         if: ${{ failure() }}
         run: |
-          MESSAGE=':red_circle: Build failed for `${{ env.IMAGE_NAME }}-${{ env.VERSION }}`'
+          MESSAGE=':red_circle: Build failed for `${{ env.IMAGE_NAME }}:${{ env.VERSION }}`'
           PAYLOAD="'text':'${MESSAGE}'"
 
           if [[ -z "$SLACK_WEBHOOK_URL" ]]; then
