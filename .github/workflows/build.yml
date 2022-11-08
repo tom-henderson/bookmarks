@@ -1,0 +1,64 @@
+name: Bookmarks
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: '0 19 1 * *'
+
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Docker Build and Push
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_NAME: bookmarks
+      SLACK_CHANNEL: '#docker'
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      BASE_VERSION: "1.0"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Set Environment
+        run: |
+          echo "RUN_NUMBER=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+          echo "VERSION=${{ env.BASE_VERSION }}.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+
+      - name: Docker Build
+        env:
+          IMAGE_ID: "docker.pkg.github.com/${{ github.repository }}/${{ env.IMAGE_NAME }}"
+        run: |
+          docker build \
+            -t ${IMAGE_ID}:${VERSION} \
+            -t ${IMAGE_ID}:latest .
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          docker push ${IMAGE_ID}:${VERSION}
+
+      - name: Tag Release
+        uses: ./.github/actions/tag-release
+        with:
+          tag: "${{ env.VERSION }}"
+
+      - name: Build Failed
+        if: ${{ failure() }}
+        run: |
+          MESSAGE=':red_circle: Build failed for `${{ env.IMAGE_NAME }}:${{ env.VERSION }}`'
+          PAYLOAD="'text':'${MESSAGE}'"
+
+          if [[ -z "$SLACK_WEBHOOK_URL" ]]; then
+            exit
+          fi
+
+          if [[ -n "$SLACK_CHANNEL" ]]; then
+            PAYLOAD="${PAYLOAD},'channel':'${SLACK_CHANNEL}'"
+          fi
+
+          echo "INFO: Sending slack message ${MESSAGE}."
+          curl --silent --output /dev/null --show-error --request POST --header 'Content-type: application/json' --data "{${PAYLOAD}}" "${SLACK_WEBHOOK_URL}"

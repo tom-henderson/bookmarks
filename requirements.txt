@@ -1,3 +1,24 @@
-# This file is here because many Platforms as a Service look for
-#	requirements.txt in the root directory of a project.
--r requirements/production.txt
+Django==4.0.4
+six==1.16.0
+sqlparse==0.4.2
+
+# Whitenoise: Staticfile hosting
+whitenoise==6.0.0
+django-npm==1.0.0
+
+# Tagging
+# Taggit Helpers: TaggitCounter, TaggitListFilter
+# Taggit Templatetags: Template tags for tags - https://github.com/feuervogel/django-taggit-templatetags
+django-taggit==2.1.0
+django-taggit-helpers==0.1.4
+
+# Django REST Framework
+djangorestframework==3.13.1
+
+requests==2.27.1
+
+markdown==3.3.6
+
+git+https://github.com/tom-henderson/django-common
+
+gunicorn==20.1.0
