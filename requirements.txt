@@ -22,3 +22,4 @@ markdown==3.3.6
 git+https://github.com/tom-henderson/django-common
 
 gunicorn==20.1.0
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
