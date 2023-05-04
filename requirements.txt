@@ -9,7 +9,7 @@ django-npm==1.0.0
 # Tagging
 # Taggit Helpers: TaggitCounter, TaggitListFilter
 # Taggit Templatetags: Template tags for tags - https://github.com/feuervogel/django-taggit-templatetags
-django-taggit==2.1.0
+django-taggit==4.0.0
 django-taggit-helpers==0.1.4
 
 # Django REST Framework
