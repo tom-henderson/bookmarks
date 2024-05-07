@@ -111,6 +111,11 @@ class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
     model = Bookmark
     form_class = BookmarkForm
     success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super(BookmarkUpdate, self).get_context_data(**kwargs)
+        context['subheading'] = f"Edit: {self.object.title}"
+        return context
     
     def get_template_names(self):
         if self.request.GET.get('modal'):
