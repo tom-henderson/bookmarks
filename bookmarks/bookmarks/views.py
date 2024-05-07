@@ -125,4 +125,10 @@ class Charts(TemplateView):
 
 class ModalFilterForm(TemplateView):
     template_name = 'bookmarks/filter_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ModalFilterForm, self).get_context_data(**kwargs)
+        context['date_added_from'] = self.request.GET.get('date_added_from', None)
+        context['date_added_to'] = self.request.GET.get('date_added_to', None)
+        return context
 
