@@ -25,10 +25,18 @@
         </li>
 
         {% if user.is_authenticated %}
-          <li><a href="{% url 'bookmark_create' %}?{% url_replace request 'next' request.get_full_path %}">Add</a></li>
+          <li><a href="#" hx-get="{% url 'modal_bookmark_create' %}?{% url_replace request 'next' request.get_full_path %}"
+                 hx-target="#modals-here"
+                 hx-trigger="click"
+                 data-toggle="modal"
+                 data-target="#modals-here">Add</a></li>
         {% endif %}
 
-        <li><a href="#" data-toggle="modal" data-target="#filter-form">Filter</a></li>
+        <li><a href="#" hx-get="{% url 'modal_filter_form' %}"
+               hx-target="#modals-here"
+               hx-trigger="click"
+               data-toggle="modal"
+               data-target="#modals-here">Filter</a></li>
         <li><a href="{% url 'charts' %}">Charts</a></li>
 
         {% if user.is_authenticated %}

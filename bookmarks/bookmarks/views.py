@@ -88,6 +88,12 @@ class BookmarkForm(BootStrapForm):
         self.fields['tags'].widget.attrs['data-role'] = 'tagsinput'
 
 
+class ModalBookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
+    template_name = 'form_modal.html'
+    form_class = BookmarkForm
+    success_url = '/'
+
+
 class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
     template_name = 'form_view.html'
     form_class = BookmarkForm
@@ -102,6 +108,13 @@ class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
         return initial
 
 
+class ModalBookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
+    template_name = 'form_modal.html'
+    model = Bookmark
+    form_class = BookmarkForm
+    success_url = '/'
+
+
 class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
     template_name = 'form_view.html'
     model = Bookmark
@@ -111,3 +124,8 @@ class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
 
 class Charts(TemplateView):
     template_name = 'bookmarks/charts.html'
+
+
+class ModalFilterForm(TemplateView):
+    template_name = 'bookmarks/filter_form.html'
+
