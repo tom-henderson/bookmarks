@@ -25,7 +25,7 @@
         </li>
 
         {% if user.is_authenticated %}
-          <li><a href="#" hx-get="{% url 'modal_bookmark_create' %}?{% url_replace request 'next' request.get_full_path %}"
+          <li><a href="#" hx-get="{% url 'bookmark_create' %}?{% url_replace request 'next' request.get_full_path %}&modal=true"
                  hx-target="#modals-here"
                  hx-trigger="click"
                  data-toggle="modal"

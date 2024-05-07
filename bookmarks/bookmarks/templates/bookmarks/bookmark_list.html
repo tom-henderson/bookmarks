@@ -14,7 +14,7 @@
         <small>{{bookmark.date_added}}
         {% if user.is_staff %}
           <span class="admin-menu fade">
-            <a href="#" hx-get="{% url 'modal_filter_form' bookmark.id %}?{% url_replace request 'next' request.get_full_path %}"
+            <a href="#" hx-get="{% url 'bookmark_update' bookmark.id %}?{% url_replace request 'next' request.get_full_path %}&modal=true"
                         hx-target="#modals-here" 
                         hx-trigger="click" 
                         data-toggle="modal"
