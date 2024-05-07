@@ -1,0 +1,77 @@
+{% load static %}
+{% load form_extras %}
+{% load template_extras %}
+
+<form class="form-horizontal" role="form" method="post" action="{{ request.path }}?{% url_replace request 'next' request.GET.next %}">
+  {% csrf_token %}
+
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{ subheading }}</h4>
+      </div>
+
+      <div class="modal-body">
+  
+        {% for field in form %}
+
+        <div class="form-group {% if field.errors %}has-error{% endif %}">
+  
+          <label for="{{field.id_for_label}}" class="col-xs-4 col-sm-3 control-label">
+            {{ field.label|title }}
+          </label>
+  
+          <div class="col-xs-9">
+            {% if field|field_type != "CheckboxInput" %}
+              {{ field }}
+            {% else %}
+              <ul class="list-unstyled">
+                {% for checkbox in field %}
+                <li class="checkbox">{{ checkbox }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+  
+        </div>
+  
+        {% endfor %}
+
+      </div>
+
+
+      <div class="modal-footer">
+        <a type="button" class="btn btn-default" data-dismiss="modal">Cancel</a>
+        <button type="submit" class="btn btn-primary">
+          {% if submit_button_label %}
+            {{ submit_button_label }}
+          {% else %}
+            Submit
+          {% endif %}
+        </button>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+<script>
+var bloodhound = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  prefetch: {
+    url: '/api/tags/?format=json',
+    cache: false,
+  }
+});
+bloodhound.initialize();
+
+$('input[data-role=tagsinput]').tokenfield({
+  typeahead: {
+    displayKey: 'name',
+    valueKey: 'name',
+    source: bloodhound.ttAdapter()
+  }
+});
+</script>
