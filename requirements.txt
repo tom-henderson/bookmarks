@@ -22,3 +22,4 @@ markdown==3.6
 git+https://github.com/tom-henderson/django-common
 
 gunicorn==22.0.0
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
