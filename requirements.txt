@@ -17,7 +17,7 @@ djangorestframework==3.15.1
 
 requests==2.31.0
 
-markdown==3.6
+markdown==3.7
 
 git+https://github.com/tom-henderson/django-common
 
