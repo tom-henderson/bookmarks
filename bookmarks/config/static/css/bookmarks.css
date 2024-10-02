@@ -10,6 +10,22 @@ h4 small {
     white-space: nowrap;
 }
 
+/* Overrides for dark mode */
+@media (prefers-color-scheme: dark) {
+    .label-primary {
+        background-color: #337ab7;
+    }
+
+    .label-primary[href]:hover,
+    .label-primary[href]:focus {
+        background-color: #286090;
+    }
+
+    .navbar {
+        background-image: none;
+    }
+}
+
 .twitter-typeahead .tt-query,
 .twitter-typeahead .tt-hint {
     margin-bottom: 0;

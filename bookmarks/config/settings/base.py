@@ -160,6 +160,10 @@ NPM_FILE_PATTERNS = {
         'dist/*.min.js',
         'dist/css/*.min.css',
     ],
+    'bootswatch': [
+        'slate/bootstrap.min.css',
+        'fonts/*',
+    ],
     'chart.js': [
         'dist/Chart.bundle.min.js'
     ],
