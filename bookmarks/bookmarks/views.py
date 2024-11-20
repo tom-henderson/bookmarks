@@ -89,9 +89,14 @@ class BookmarkForm(BootStrapForm):
 
 
 class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
-    template_name = 'form_view.html'
     form_class = BookmarkForm
     success_url = '/'
+
+    def get_template_names(self):
+        if self.request.GET.get('modal'):
+            return ['form_modal.html']
+        else:
+            return ['form_view.html']
 
     def get_initial(self):
         initial = {
@@ -103,11 +108,32 @@ class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
 
 
 class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
-    template_name = 'form_view.html'
     model = Bookmark
     form_class = BookmarkForm
     success_url = '/'
 
+    def get_context_data(self, **kwargs):
+        context = super(BookmarkUpdate, self).get_context_data(**kwargs)
+        context['subheading'] = f"Edit: {self.object.title}"
+        return context
+    
+    def get_template_names(self):
+        if self.request.GET.get('modal'):
+            return ['form_modal.html']
+        else:
+            return ['form_view.html']
+
 
 class Charts(TemplateView):
     template_name = 'bookmarks/charts.html'
+
+
+class ModalFilterForm(TemplateView):
+    template_name = 'bookmarks/filter_form.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ModalFilterForm, self).get_context_data(**kwargs)
+        context['date_added_from'] = self.request.GET.get('date_added_from', None)
+        context['date_added_to'] = self.request.GET.get('date_added_to', None)
+        return context
+
