@@ -127,6 +127,7 @@ THIRD_PARTY_APPS = (
     'taggit',
     'taggit_helpers',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_common',
 )
 

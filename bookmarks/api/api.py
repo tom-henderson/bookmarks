@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.permissions import IsAuthenticated
 from taggit.serializers import TagListSerializerField, TaggitSerializer
 from django.db.models import Count
 from bookmarks.models import Bookmark
@@ -53,3 +54,9 @@ class API_Tags(ListAPIView):
         num_items=Count('taggit_taggeditem_items')
     )
     serializer_class = TagSerializer
+
+
+class API_Create(CreateAPIView):
+    queryset = Bookmark.objects.all()
+    serializer_class = BookmarkSerializer
+    permission_classes = [IsAuthenticated]

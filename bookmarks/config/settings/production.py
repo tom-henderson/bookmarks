@@ -22,11 +22,16 @@ ALLOWED_HOSTS = ['*']
 # SERVER_EMAIL = EMAIL_HOST_USER
 
 # DJANGO REST FRAMEWORK
-# Disable the browsable HTTP API
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer', # Disable the browsable HTTP API
+    ],
 }
 
 # SLACK INTEGRATION
