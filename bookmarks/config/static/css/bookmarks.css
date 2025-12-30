@@ -168,28 +168,24 @@ a.tag.label-default {
     border: 1px solid #337ab7;
 }
 
-@media (prefers-color-scheme: dark) {
-    #activity-chart {
-        background-color: #222;
-    }
-    
+@media (prefers-color-scheme: dark) {    
     .activity-day.level-0 {
         background-color: #161b22;
     }
     
     .activity-day.level-1 {
-        background-color: #0e4429;
+        background-color: #0a3d62;
     }
     
     .activity-day.level-2 {
-        background-color: #006d32;
+        background-color: #1e5f8c;
     }
     
     .activity-day.level-3 {
-        background-color: #26a641;
+        background-color: #2874a6;
     }
     
     .activity-day.level-4 {
-        background-color: #39d353;
+        background-color: #3498db;
     }
 }
