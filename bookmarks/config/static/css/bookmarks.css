@@ -90,7 +90,6 @@ a.tag.label-default {
 #activity-chart {
     margin-bottom: 30px;
     padding: 15px;
-    background-color: #f9f9f9;
     border-radius: 4px;
 }
 
@@ -100,10 +99,26 @@ a.tag.label-default {
 }
 
 #activity-grid {
-    display: flex;
-    gap: 3px;
+    position: relative;
     overflow-x: auto;
     padding-bottom: 10px;
+}
+
+.activity-months {
+    position: relative;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.activity-month {
+    position: absolute;
+    font-size: 11px;
+    color: #767676;
+}
+
+.activity-weeks {
+    display: flex;
+    gap: 3px;
 }
 
 .activity-week {

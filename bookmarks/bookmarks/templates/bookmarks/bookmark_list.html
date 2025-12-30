@@ -6,11 +6,9 @@
 
 <div class="container">
 
-  <!-- Activity Chart -->
   <div class="row">
     <div class="col-xs-12">
       <div id="activity-chart">
-        <h4>Activity</h4>
         <div id="activity-grid"></div>
       </div>
     </div>
@@ -104,10 +102,13 @@
     
     // Render activity chart
     var activityData = {{ activity_data|safe }};
-    var gridHtml = '';
+    var monthLabels = [];
     var weeks = [];
     var currentWeek = [];
+    var currentMonth = null;
+    var weekIndex = 0;
     var dayOfWeek = new Date(activityData[0].date).getDay();
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
     // Add empty cells for the first week to align with Sunday
     for (var i = 0; i < dayOfWeek; i++) {
@@ -119,6 +120,16 @@
       var date = new Date(day.date);
       var dayOfWeek = date.getDay();
       var count = day.count;
+      var month = date.getMonth();
+      
+      // Track month changes for labels
+      if (dayOfWeek === 0 && month !== currentMonth) {
+        monthLabels.push({
+          weekIndex: weekIndex,
+          label: monthNames[month]
+        });
+        currentMonth = month;
+      }
       
       // Determine color level (0-4)
       var level = 0;
@@ -135,10 +146,18 @@
       if (dayOfWeek === 6 || index === activityData.length - 1) {
         weeks.push('<div class="activity-week">' + currentWeek.join('') + '</div>');
         currentWeek = [];
+        weekIndex++;
       }
     });
     
-    $('#activity-grid').html(weeks.join(''));
+    // Build month labels HTML
+    var monthLabelsHtml = '<div class="activity-months">';
+    monthLabels.forEach(function(label) {
+      monthLabelsHtml += '<div class="activity-month" style="left: ' + (label.weekIndex * 14) + 'px;">' + label.label + '</div>';
+    });
+    monthLabelsHtml += '</div>';
+    
+    $('#activity-grid').html(monthLabelsHtml + '<div class="activity-weeks">' + weeks.join('') + '</div>');
 
     $('#reset').on("click", function() {
       $('#filter-form').find(':input').each(function() {
