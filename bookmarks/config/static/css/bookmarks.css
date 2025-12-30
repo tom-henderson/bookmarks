@@ -132,6 +132,10 @@ a.tag.label-default {
     height: 11px;
     border-radius: 2px;
     background-color: #ebedf0;
+    cursor: default;
+}
+
+.activity-day[data-date] {
     cursor: pointer;
 }
 
@@ -160,7 +164,7 @@ a.tag.label-default {
     background-color: #337ab7;
 }
 
-.activity-day:hover:not(.empty) {
+.activity-day[data-date]:hover {
     border: 1px solid #337ab7;
 }
 

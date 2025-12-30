@@ -139,7 +139,8 @@
       if (count >= 8) level = 4;
       
       var title = day.date + ': ' + count + ' bookmark' + (count !== 1 ? 's' : '');
-      var cell = '<div class="activity-day level-' + level + '" title="' + title + '"></div>';
+      var dataAttr = count > 0 ? ' data-date="' + day.date + '"' : '';
+      var cell = '<div class="activity-day level-' + level + '"' + dataAttr + ' title="' + title + '"></div>';
       currentWeek.push(cell);
       
       // Start new week on Saturday (day 6)
@@ -158,6 +159,15 @@
     monthLabelsHtml += '</div>';
     
     $('#activity-grid').html(monthLabelsHtml + '<div class="activity-weeks">' + weeks.join('') + '</div>');
+    
+    // Add click handlers for activity days
+    $('.activity-day[data-date]').on('click', function() {
+      var date = $(this).data('date');
+      var nextDay = new Date(date);
+      nextDay.setDate(nextDay.getDate() + 1);
+      var nextDayStr = nextDay.toISOString().split('T')[0];
+      window.location.href = '/?date_added_from=' + date + '&date_added_to=' + nextDayStr;
+    });
 
     $('#reset').on("click", function() {
       $('#filter-form').find(':input').each(function() {
