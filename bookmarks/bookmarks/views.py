@@ -2,8 +2,11 @@ from django.shortcuts import render
 from django.views.generic import FormView
 from django.views.generic import TemplateView, ListView
 from django.views.generic import CreateView, UpdateView
-from django.db.models import Q
+from django.db.models import Q, Count
+from django.db.models.functions import TruncDate
 from django import forms
+from datetime import datetime, timedelta
+import json
 
 from .models import Bookmark
 from taggit.models import Tag
@@ -54,6 +57,38 @@ class BookmarksList(ListView):
         search = self.request.GET.get('search', None)
         if search:
             context['search'] = search
+
+        # Activity data for the last year
+        end_date = datetime.now().date()
+        start_date = end_date - timedelta(days=365)
+        
+        queryset = Bookmark.objects.all()
+        if not self.request.user.is_authenticated:
+            queryset = queryset.filter(private=False)
+        
+        activity_data = queryset.filter(
+            date_added__date__gte=start_date,
+            date_added__date__lte=end_date
+        ).annotate(
+            date=TruncDate('date_added')
+        ).values('date').annotate(
+            count=Count('id')
+        ).order_by('date')
+        
+        # Convert to dict for easier lookup
+        activity_dict = {str(item['date']): item['count'] for item in activity_data}
+        
+        # Generate all dates for the last year
+        activity_grid = []
+        current_date = start_date
+        while current_date <= end_date:
+            activity_grid.append({
+                'date': str(current_date),
+                'count': activity_dict.get(str(current_date), 0)
+            })
+            current_date += timedelta(days=1)
+        
+        context['activity_data'] = json.dumps(activity_grid)
 
         return context
 

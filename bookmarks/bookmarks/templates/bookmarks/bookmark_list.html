@@ -6,6 +6,16 @@
 
 <div class="container">
 
+  <!-- Activity Chart -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="activity-chart">
+        <h4>Activity</h4>
+        <div id="activity-grid"></div>
+      </div>
+    </div>
+  </div>
+
   {% for bookmark in bookmarks %}
   <div class="row bookmark">
     <div class="col-xs-12">
@@ -91,6 +101,45 @@
 <script src="{% static 'npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
 <script language="javascript">
   $(document).ready(function(){
+    
+    // Render activity chart
+    var activityData = {{ activity_data|safe }};
+    var gridHtml = '';
+    var weeks = [];
+    var currentWeek = [];
+    var dayOfWeek = new Date(activityData[0].date).getDay();
+    
+    // Add empty cells for the first week to align with Sunday
+    for (var i = 0; i < dayOfWeek; i++) {
+      currentWeek.push('<div class="activity-day empty"></div>');
+    }
+    
+    // Process each day
+    activityData.forEach(function(day, index) {
+      var date = new Date(day.date);
+      var dayOfWeek = date.getDay();
+      var count = day.count;
+      
+      // Determine color level (0-4)
+      var level = 0;
+      if (count > 0) level = 1;
+      if (count >= 3) level = 2;
+      if (count >= 5) level = 3;
+      if (count >= 8) level = 4;
+      
+      var title = day.date + ': ' + count + ' bookmark' + (count !== 1 ? 's' : '');
+      var cell = '<div class="activity-day level-' + level + '" title="' + title + '"></div>';
+      currentWeek.push(cell);
+      
+      // Start new week on Saturday (day 6)
+      if (dayOfWeek === 6 || index === activityData.length - 1) {
+        weeks.push('<div class="activity-week">' + currentWeek.join('') + '</div>');
+        currentWeek = [];
+      }
+    });
+    
+    $('#activity-grid').html(weeks.join(''));
+
     $('#reset').on("click", function() {
       $('#filter-form').find(':input').each(function() {
         switch(this.type) {
