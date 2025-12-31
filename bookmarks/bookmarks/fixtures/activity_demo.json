@@ -1,0 +1,552 @@
+[
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 1,
+    "fields": {
+      "title": "Django Documentation",
+      "description": "Official Django documentation",
+      "date_added": "2025-12-15T10:00:00Z",
+      "private": false,
+      "url": "https://docs.djangoproject.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 2,
+    "fields": {
+      "title": "Python.org",
+      "description": "Python programming language official site",
+      "date_added": "2025-12-15T11:00:00Z",
+      "private": false,
+      "url": "https://www.python.org/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 3,
+    "fields": {
+      "title": "GitHub",
+      "description": "Code hosting platform",
+      "date_added": "2025-12-15T12:00:00Z",
+      "private": false,
+      "url": "https://github.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 4,
+    "fields": {
+      "title": "Stack Overflow",
+      "description": "Q&A for programmers",
+      "date_added": "2025-12-10T09:00:00Z",
+      "private": false,
+      "url": "https://stackoverflow.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 5,
+    "fields": {
+      "title": "MDN Web Docs",
+      "description": "Web development documentation",
+      "date_added": "2025-12-10T10:00:00Z",
+      "private": false,
+      "url": "https://developer.mozilla.org/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 6,
+    "fields": {
+      "title": "CSS-Tricks",
+      "description": "Frontend development tips and tricks",
+      "date_added": "2025-12-10T11:00:00Z",
+      "private": false,
+      "url": "https://css-tricks.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 7,
+    "fields": {
+      "title": "Real Python",
+      "description": "Python tutorials and articles",
+      "date_added": "2025-12-10T12:00:00Z",
+      "private": false,
+      "url": "https://realpython.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 8,
+    "fields": {
+      "title": "Django REST Framework",
+      "description": "Powerful and flexible toolkit for building Web APIs",
+      "date_added": "2025-12-10T13:00:00Z",
+      "private": false,
+      "url": "https://www.django-rest-framework.org/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 9,
+    "fields": {
+      "title": "Bootstrap Documentation",
+      "description": "Bootstrap CSS framework docs",
+      "date_added": "2025-12-05T10:00:00Z",
+      "private": false,
+      "url": "https://getbootstrap.com/docs/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 10,
+    "fields": {
+      "title": "jQuery API",
+      "description": "jQuery JavaScript library documentation",
+      "date_added": "2025-12-05T11:00:00Z",
+      "private": false,
+      "url": "https://api.jquery.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 11,
+    "fields": {
+      "title": "PostgreSQL Documentation",
+      "description": "PostgreSQL database documentation",
+      "date_added": "2025-11-28T10:00:00Z",
+      "private": false,
+      "url": "https://www.postgresql.org/docs/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 12,
+    "fields": {
+      "title": "Redis Documentation",
+      "description": "In-memory data structure store",
+      "date_added": "2025-11-28T11:00:00Z",
+      "private": false,
+      "url": "https://redis.io/documentation"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 13,
+    "fields": {
+      "title": "Docker Documentation",
+      "description": "Container platform documentation",
+      "date_added": "2025-11-28T12:00:00Z",
+      "private": false,
+      "url": "https://docs.docker.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 14,
+    "fields": {
+      "title": "Nginx Documentation",
+      "description": "Web server and reverse proxy",
+      "date_added": "2025-11-20T10:00:00Z",
+      "private": false,
+      "url": "https://nginx.org/en/docs/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 15,
+    "fields": {
+      "title": "Git Documentation",
+      "description": "Version control system",
+      "date_added": "2025-11-20T11:00:00Z",
+      "private": false,
+      "url": "https://git-scm.com/doc"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 16,
+    "fields": {
+      "title": "React Documentation",
+      "description": "JavaScript library for building user interfaces",
+      "date_added": "2025-11-15T10:00:00Z",
+      "private": false,
+      "url": "https://react.dev/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 17,
+    "fields": {
+      "title": "Vue.js Documentation",
+      "description": "Progressive JavaScript framework",
+      "date_added": "2025-11-15T11:00:00Z",
+      "private": false,
+      "url": "https://vuejs.org/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 18,
+    "fields": {
+      "title": "TypeScript Documentation",
+      "description": "Typed superset of JavaScript",
+      "date_added": "2025-11-15T12:00:00Z",
+      "private": false,
+      "url": "https://www.typescriptlang.org/docs/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 19,
+    "fields": {
+      "title": "Node.js Documentation",
+      "description": "JavaScript runtime built on Chrome's V8",
+      "date_added": "2025-11-15T13:00:00Z",
+      "private": false,
+      "url": "https://nodejs.org/docs/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 20,
+    "fields": {
+      "title": "Express.js",
+      "description": "Fast, unopinionated web framework for Node.js",
+      "date_added": "2025-11-15T14:00:00Z",
+      "private": false,
+      "url": "https://expressjs.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 21,
+    "fields": {
+      "title": "FastAPI Documentation",
+      "description": "Modern, fast web framework for building APIs with Python",
+      "date_added": "2025-11-10T10:00:00Z",
+      "private": false,
+      "url": "https://fastapi.tiangolo.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 22,
+    "fields": {
+      "title": "Flask Documentation",
+      "description": "Lightweight WSGI web application framework",
+      "date_added": "2025-11-10T11:00:00Z",
+      "private": false,
+      "url": "https://flask.palletsprojects.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 23,
+    "fields": {
+      "title": "Celery Documentation",
+      "description": "Distributed task queue",
+      "date_added": "2025-11-10T12:00:00Z",
+      "private": false,
+      "url": "https://docs.celeryq.dev/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 24,
+    "fields": {
+      "title": "AWS Documentation",
+      "description": "Amazon Web Services documentation",
+      "date_added": "2025-11-05T10:00:00Z",
+      "private": false,
+      "url": "https://docs.aws.amazon.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 25,
+    "fields": {
+      "title": "Kubernetes Documentation",
+      "description": "Container orchestration platform",
+      "date_added": "2025-11-05T11:00:00Z",
+      "private": false,
+      "url": "https://kubernetes.io/docs/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 26,
+    "fields": {
+      "title": "Terraform Documentation",
+      "description": "Infrastructure as code tool",
+      "date_added": "2025-11-05T12:00:00Z",
+      "private": false,
+      "url": "https://www.terraform.io/docs"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 27,
+    "fields": {
+      "title": "Ansible Documentation",
+      "description": "IT automation tool",
+      "date_added": "2025-11-05T13:00:00Z",
+      "private": false,
+      "url": "https://docs.ansible.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 28,
+    "fields": {
+      "title": "GraphQL Documentation",
+      "description": "Query language for APIs",
+      "date_added": "2025-11-05T14:00:00Z",
+      "private": false,
+      "url": "https://graphql.org/learn/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 29,
+    "fields": {
+      "title": "MongoDB Documentation",
+      "description": "NoSQL database documentation",
+      "date_added": "2025-11-05T15:00:00Z",
+      "private": false,
+      "url": "https://www.mongodb.com/docs/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 30,
+    "fields": {
+      "title": "Elasticsearch Documentation",
+      "description": "Search and analytics engine",
+      "date_added": "2025-11-05T16:00:00Z",
+      "private": false,
+      "url": "https://www.elastic.co/guide/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 31,
+    "fields": {
+      "title": "RabbitMQ Documentation",
+      "description": "Message broker",
+      "date_added": "2025-11-05T17:00:00Z",
+      "private": false,
+      "url": "https://www.rabbitmq.com/documentation.html"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 32,
+    "fields": {
+      "title": "Apache Kafka Documentation",
+      "description": "Distributed event streaming platform",
+      "date_added": "2025-11-05T18:00:00Z",
+      "private": false,
+      "url": "https://kafka.apache.org/documentation/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 33,
+    "fields": {
+      "title": "Webpack Documentation",
+      "description": "JavaScript module bundler",
+      "date_added": "2025-10-28T10:00:00Z",
+      "private": false,
+      "url": "https://webpack.js.org/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 34,
+    "fields": {
+      "title": "Vite Documentation",
+      "description": "Next generation frontend tooling",
+      "date_added": "2025-10-28T11:00:00Z",
+      "private": false,
+      "url": "https://vitejs.dev/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 35,
+    "fields": {
+      "title": "Tailwind CSS",
+      "description": "Utility-first CSS framework",
+      "date_added": "2025-10-20T10:00:00Z",
+      "private": false,
+      "url": "https://tailwindcss.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 36,
+    "fields": {
+      "title": "Next.js Documentation",
+      "description": "React framework for production",
+      "date_added": "2025-10-15T10:00:00Z",
+      "private": false,
+      "url": "https://nextjs.org/docs"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 37,
+    "fields": {
+      "title": "Svelte Documentation",
+      "description": "Cybernetically enhanced web apps",
+      "date_added": "2025-10-10T10:00:00Z",
+      "private": false,
+      "url": "https://svelte.dev/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 38,
+    "fields": {
+      "title": "Rust Documentation",
+      "description": "Systems programming language",
+      "date_added": "2025-10-05T10:00:00Z",
+      "private": false,
+      "url": "https://doc.rust-lang.org/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 39,
+    "fields": {
+      "title": "Go Documentation",
+      "description": "Programming language by Google",
+      "date_added": "2025-09-28T10:00:00Z",
+      "private": false,
+      "url": "https://go.dev/doc/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 40,
+    "fields": {
+      "title": "Ruby Documentation",
+      "description": "Dynamic, open source programming language",
+      "date_added": "2025-09-20T10:00:00Z",
+      "private": false,
+      "url": "https://www.ruby-lang.org/en/documentation/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 41,
+    "fields": {
+      "title": "Rails Guides",
+      "description": "Ruby on Rails framework guides",
+      "date_added": "2025-09-15T10:00:00Z",
+      "private": false,
+      "url": "https://guides.rubyonrails.org/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 42,
+    "fields": {
+      "title": "Laravel Documentation",
+      "description": "PHP web application framework",
+      "date_added": "2025-09-10T10:00:00Z",
+      "private": false,
+      "url": "https://laravel.com/docs"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 43,
+    "fields": {
+      "title": "Spring Boot Documentation",
+      "description": "Java-based framework",
+      "date_added": "2025-09-05T10:00:00Z",
+      "private": false,
+      "url": "https://spring.io/projects/spring-boot"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 44,
+    "fields": {
+      "title": "ASP.NET Core Documentation",
+      "description": "Cross-platform .NET framework",
+      "date_added": "2025-08-28T10:00:00Z",
+      "private": false,
+      "url": "https://docs.microsoft.com/en-us/aspnet/core/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 45,
+    "fields": {
+      "title": "Elixir Documentation",
+      "description": "Dynamic, functional language",
+      "date_added": "2025-08-20T10:00:00Z",
+      "private": false,
+      "url": "https://elixir-lang.org/docs.html"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 46,
+    "fields": {
+      "title": "Phoenix Framework",
+      "description": "Productive web framework for Elixir",
+      "date_added": "2025-08-15T10:00:00Z",
+      "private": false,
+      "url": "https://www.phoenixframework.org/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 47,
+    "fields": {
+      "title": "Hacker News",
+      "description": "Tech news and discussion",
+      "date_added": "2025-08-10T10:00:00Z",
+      "private": false,
+      "url": "https://news.ycombinator.com/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 48,
+    "fields": {
+      "title": "Dev.to",
+      "description": "Community for software developers",
+      "date_added": "2025-08-05T10:00:00Z",
+      "private": false,
+      "url": "https://dev.to/"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 49,
+    "fields": {
+      "title": "Medium Engineering",
+      "description": "Engineering articles and stories",
+      "date_added": "2025-07-28T10:00:00Z",
+      "private": false,
+      "url": "https://medium.com/tag/engineering"
+    }
+  },
+  {
+    "model": "bookmarks.bookmark",
+    "pk": 50,
+    "fields": {
+      "title": "A List Apart",
+      "description": "Web design and development articles",
+      "date_added": "2025-07-20T10:00:00Z",
+      "private": false,
+      "url": "https://alistapart.com/"
+    }
+  }
+]

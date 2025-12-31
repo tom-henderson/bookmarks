@@ -6,6 +6,14 @@
 
 <div class="container">
 
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="activity-chart">
+        <div id="activity-grid"></div>
+      </div>
+    </div>
+  </div>
+
   {% for bookmark in bookmarks %}
   <div class="row bookmark">
     <div class="col-xs-12">
@@ -91,6 +99,76 @@
 <script src="{% static 'npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
 <script language="javascript">
   $(document).ready(function(){
+    
+    // Render activity chart
+    var activityData = {{ activity_data|safe }};
+    var monthLabels = [];
+    var weeks = [];
+    var currentWeek = [];
+    var currentMonth = null;
+    var weekIndex = 0;
+    var dayOfWeek = new Date(activityData[0].date).getDay();
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    // Add empty cells for the first week to align with Sunday
+    for (var i = 0; i < dayOfWeek; i++) {
+      currentWeek.push('<div class="activity-day empty"></div>');
+    }
+    
+    // Process each day
+    activityData.forEach(function(day, index) {
+      var date = new Date(day.date);
+      var dayOfWeek = date.getDay();
+      var count = day.count;
+      var month = date.getMonth();
+      
+      // Track month changes for labels
+      if (dayOfWeek === 0 && month !== currentMonth) {
+        monthLabels.push({
+          weekIndex: weekIndex,
+          label: monthNames[month]
+        });
+        currentMonth = month;
+      }
+      
+      // Determine color level (0-4)
+      var level = 0;
+      if (count > 0) level = 1;
+      if (count >= 3) level = 2;
+      if (count >= 5) level = 3;
+      if (count >= 8) level = 4;
+      
+      var title = day.date + ': ' + count + ' bookmark' + (count !== 1 ? 's' : '');
+      var dataAttr = count > 0 ? ' data-date="' + day.date + '"' : '';
+      var cell = '<div class="activity-day level-' + level + '"' + dataAttr + ' title="' + title + '"></div>';
+      currentWeek.push(cell);
+      
+      // Start new week on Saturday (day 6)
+      if (dayOfWeek === 6 || index === activityData.length - 1) {
+        weeks.push('<div class="activity-week">' + currentWeek.join('') + '</div>');
+        currentWeek = [];
+        weekIndex++;
+      }
+    });
+    
+    // Build month labels HTML
+    var monthLabelsHtml = '<div class="activity-months">';
+    monthLabels.forEach(function(label) {
+      monthLabelsHtml += '<div class="activity-month" style="left: ' + (label.weekIndex * 14) + 'px;">' + label.label + '</div>';
+    });
+    monthLabelsHtml += '</div>';
+    
+    $('#activity-grid').html(monthLabelsHtml + '<div class="activity-weeks">' + weeks.join('') + '</div>');
+    
+    // Add click handlers for activity days
+    $('.activity-day[data-date]').on('click', function() {
+      var date = $(this).data('date');
+      var nextDay = new Date(date);
+      nextDay.setDate(nextDay.getDate() + 1);
+      var nextDayStr = nextDay.toISOString().split('T')[0];
+      window.location.href = '/?date_added_from=' + date + '&date_added_to=' + nextDayStr;
+    });
+
     $('#reset').on("click", function() {
       $('#filter-form').find(':input').each(function() {
         switch(this.type) {

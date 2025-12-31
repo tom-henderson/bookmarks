@@ -85,3 +85,107 @@ h4 small {
 a.tag.label-default {
     background-color: #999;
 }
+
+/* Activity Chart Styles */
+#activity-chart {
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#activity-chart h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#activity-grid {
+    position: relative;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.activity-months {
+    position: relative;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.activity-month {
+    position: absolute;
+    font-size: 11px;
+    color: #767676;
+}
+
+.activity-weeks {
+    display: flex;
+    gap: 3px;
+}
+
+.activity-week {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.activity-day {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    background-color: #ebedf0;
+    cursor: default;
+}
+
+.activity-day[data-date] {
+    cursor: pointer;
+}
+
+.activity-day.empty {
+    background-color: transparent;
+    cursor: default;
+}
+
+.activity-day.level-0 {
+    background-color: #ebedf0;
+}
+
+.activity-day.level-1 {
+    background-color: #c6e2f5;
+}
+
+.activity-day.level-2 {
+    background-color: #7db9e8;
+}
+
+.activity-day.level-3 {
+    background-color: #4a9cd6;
+}
+
+.activity-day.level-4 {
+    background-color: #337ab7;
+}
+
+.activity-day[data-date]:hover {
+    border: 1px solid #337ab7;
+}
+
+@media (prefers-color-scheme: dark) {    
+    .activity-day.level-0 {
+        background-color: #161b22;
+    }
+    
+    .activity-day.level-1 {
+        background-color: #0a3d62;
+    }
+    
+    .activity-day.level-2 {
+        background-color: #1e5f8c;
+    }
+    
+    .activity-day.level-3 {
+        background-color: #2874a6;
+    }
+    
+    .activity-day.level-4 {
+        background-color: #3498db;
+    }
+}
