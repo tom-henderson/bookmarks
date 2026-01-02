@@ -1,0 +1,18 @@
+<div id="activity-grid">
+  <div class="activity-months">
+    {% for month_label in activity_chart.month_labels %}
+    <div class="activity-month" style="left: {{ month_label.offset }}px;">{{ month_label.label }}</div>
+    {% endfor %}
+  </div>
+  <div class="activity-weeks">
+    {% for week in activity_chart.weeks %}
+    <div class="activity-week">
+      {% for day in week %}
+      <div class="activity-day{% if not day.date %} empty{% endif %} level-{{ day.level }}"
+           {% if day.clickable %}data-date="{{ day.date }}"{% endif %}
+           {% if day.title %}title="{{ day.title }}"{% endif %}></div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</div>

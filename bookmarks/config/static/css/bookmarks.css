@@ -140,7 +140,7 @@ a.tag.label-default {
 }
 
 .activity-day.empty {
-    background-color: transparent;
+    background-color: transparent !important;
     cursor: default;
 }
 
