@@ -126,7 +126,7 @@ class BookmarksList(ListView):
             if day_of_week == 0 and month != current_month:
                 month_labels.append({
                     'week_index': week_index,
-                    'offset': week_index * 14,  # 11px width + 3px gap
+                    'offset': week_index * 14 - 14,  # 11px width + 3px gap
                     'label': month_abbr[month]
                 })
                 current_month = month
