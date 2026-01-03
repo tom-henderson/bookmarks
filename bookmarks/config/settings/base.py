@@ -164,9 +164,6 @@ NPM_FILE_PATTERNS = {
         'slate/bootstrap.min.css',
         'fonts/*',
     ],
-    'chart.js': [
-        'dist/Chart.bundle.min.js'
-    ],
     'font-awesome': [
         'css/*.min.*',
         'fonts/*',

@@ -4,71 +4,32 @@
 {% block content %}
 
 <div class="container">
+    {% for year_data in activity_years %}
     <div class="row">
         <div class="col-xs-12">
-          <h3>Top Tags <small>Top tags by frequency</small></h3>
-          <canvas id="top_tags" style="padding-right: 30px;" width="400" height="200"></canvas>
+          <h3>{{ year_data.year }}</h3>
+          {% with activity_chart=year_data.chart %}
+            {% include "bookmarks/activity_chart.html" %}
+          {% endwith %}
         </div>
     </div>
+    <br>
+    {% endfor %}
 </div>
 
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'npm/chart.js/dist/Chart.bundle.min.js' %}"></script>
 <script language="javascript">
 $(document).ready(function(){
 
-    $.ajax({
-      url:"/api/tags/?format=json",
-      crossDomain: false,
-      dataType: "json",
-      success: function (data) {
-
-        data.sort(function(a, b) {
-            return parseFloat(a.num_items) - parseFloat(b.num_items);
-        });
-        data.reverse();
-
-        var chartData = {
-          labels: [],
-          datasets: [
-            {
-              label: 'Count',
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              borderColor: "rgba(54, 162, 235, 1)",
-              borderWidth: 1,
-              data: []
-            },
-          ]
-        };
-
-        for (var i=0; i < Math.min(20, data.length); i++) {
-          chartData.labels.push(data[i].name);
-          chartData.datasets[0].data.push(parseFloat(data[i].num_items));
-        }
-
-        var context = $("#top_tags").get(0).getContext("2d");
-        var myChart = new Chart(context, {
-          type: 'bar',
-          data: chartData,
-          options: {
-            legend: {
-              display: false,
-            },
-            responsive: true,
-            maintainAspectRatio: true,
-            onClick: function(event) {
-              elements = myChart.getElementAtEvent(event);
-              if (elements.length > 0) {
-                window.location = "/tag/" + elements[0]._model.label;
-              }
-            },
-          }
-        });
-
-      },
-      error: function (xhr, status) {}
+    // Add click handlers for activity days
+    $('.activity-day[data-date]').on('click', function() {
+      var date = $(this).data('date');
+      var nextDay = new Date(date);
+      nextDay.setDate(nextDay.getDate() + 1);
+      var nextDayStr = nextDay.toISOString().split('T')[0];
+      window.location.href = '/?date_added_from=' + date + '&date_added_to=' + nextDayStr;
     });
 
 });

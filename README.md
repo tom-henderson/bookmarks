@@ -22,7 +22,6 @@ Bookmark manager to replace del.icio.us.
 - [typeahead](https://github.com/twitter/typeahead.js)
 - [bootstrap-datepicker](https://github.com/eternicode/bootstrap-datepicker)
 - [bootstrap-tokenfield](https://github.com/sliptree/bootstrap-tokenfield)
-- [chart.js](https://github.com/chartjs/Chart.js)
 
 ### Integrations
 - Heroku Slack Webhooks

@@ -6,7 +6,11 @@
 
 <div class="container">
 
-  {% include 'bookmarks/activity_chart.html' %}
+  <div class="row">
+    <div class="col-xs-12">
+      {% include 'bookmarks/activity_chart.html' %}
+    </div>
+  </div>
 
   {% for bookmark in bookmarks %}
   <div class="row bookmark">
