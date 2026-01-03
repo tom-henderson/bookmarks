@@ -76,7 +76,7 @@ class BookmarksList(ListView):
         if not self.request.user.is_authenticated:
             queryset = queryset.filter(private=False)
         
-        return build_activity_chart(queryset, start_date, end_date)
+        return build_activity_chart(queryset, start_date)
 
 
 class BookmarkTagList(BookmarksList):
@@ -155,14 +155,7 @@ class Charts(TemplateView):
         activity_years = []
         for year in range(earliest_year, current_year + 1):
             start_date = datetime(year, 1, 1).date()
-            
-            # End date is either Dec 31 of that year, or today if current year
-            if year == current_year:
-                end_date = datetime.now().date()
-            else:
-                end_date = datetime(year, 12, 31).date()
-            
-            chart_data = build_activity_chart(queryset, start_date, end_date)
+            chart_data = build_activity_chart(queryset, start_date)
             activity_years.append({
                 'year': year,
                 'chart': chart_data

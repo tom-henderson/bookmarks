@@ -4,19 +4,21 @@ from django.db.models import Count
 from django.db.models.functions import TruncDate
 
 
-def build_activity_chart(queryset, start_date, end_date):
+def build_activity_chart(queryset, start_date):
     """
-    Build activity chart data structure for server-side template rendering.
+    Build activity chart data structure for exactly one year of data.
     
     Args:
         queryset: Django queryset to aggregate (e.g., Bookmark.objects.filter(...))
-        start_date: datetime.date object for chart start
-        end_date: datetime.date object for chart end
+        start_date: datetime.date object for chart start (typically Jan 1)
     
     Returns:
         Dict with 'weeks' (list of weeks, each containing day dicts) 
         and 'month_labels' (list of month label dicts with offset positions).
     """
+    # Calculate end date as exactly 1 year from start
+    end_date = start_date + timedelta(days=365)
+    
     # Query database for bookmark counts by date
     activity_data = queryset.filter(
         date_added__date__gte=start_date,
