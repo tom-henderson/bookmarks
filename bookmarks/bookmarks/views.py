@@ -132,3 +132,46 @@ class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
 
 class Charts(TemplateView):
     template_name = 'bookmarks/charts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Charts, self).get_context_data(**kwargs)
+        
+        queryset = Bookmark.objects.all()
+        if not self.request.user.is_authenticated:
+            queryset = queryset.filter(private=False)
+        
+        # Find the earliest bookmark date
+        earliest_bookmark = queryset.order_by('date_added').first()
+        if not earliest_bookmark:
+            context['activity_years'] = []
+            context['title'] = 'Activity History'
+            return context
+        
+        # Get the year range
+        earliest_year = earliest_bookmark.date_added.year
+        current_year = datetime.now().year
+        
+        # Build one chart per calendar year
+        activity_years = []
+        for year in range(earliest_year, current_year + 1):
+            start_date = datetime(year, 1, 1).date()
+            
+            # End date is either Dec 31 of that year, or today if current year
+            if year == current_year:
+                end_date = datetime.now().date()
+            else:
+                end_date = datetime(year, 12, 31).date()
+            
+            chart_data = build_activity_chart(queryset, start_date, end_date)
+            activity_years.append({
+                'year': year,
+                'chart': chart_data
+            })
+        
+        # Reverse so most recent year is first
+        activity_years.reverse()
+        
+        context['activity_years'] = activity_years
+        context['title'] = 'Activity History'
+        
+        return context

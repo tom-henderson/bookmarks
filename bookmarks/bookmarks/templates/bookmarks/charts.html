@@ -4,6 +4,18 @@
 {% block content %}
 
 <div class="container">
+    {% for year_data in activity_years %}
+    <div class="row">
+        <div class="col-xs-12">
+          <h3>{{ year_data.year }} <small>Bookmark activity</small></h3>
+          {% with activity_chart=year_data.chart %}
+            {% include "bookmarks/activity_chart.html" %}
+          {% endwith %}
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+    
     <div class="row">
         <div class="col-xs-12">
           <h3>Top Tags <small>Top tags by frequency</small></h3>
@@ -18,6 +30,16 @@
 <script src="{% static 'npm/chart.js/dist/Chart.bundle.min.js' %}"></script>
 <script language="javascript">
 $(document).ready(function(){
+
+    // Add click handlers for activity days
+    $('.activity-day[data-date]').on('click', function() {
+      var date = $(this).data('date');
+      var nextDay = new Date(date);
+      nextDay.setDate(nextDay.getDate() + 1);
+      var nextDayStr = nextDay.toISOString().split('T')[0];
+      window.location.href = '/?date_added_from=' + date + '&date_added_to=' + nextDayStr;
+    });
+
 
     $.ajax({
       url:"/api/tags/?format=json",
