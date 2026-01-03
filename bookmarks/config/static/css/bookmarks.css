@@ -89,8 +89,6 @@ a.tag.label-default {
 /* Activity Chart Styles */
 #activity-chart {
     margin-bottom: 30px;
-    padding: 15px;
-    border-radius: 4px;
 }
 
 #activity-chart h4 {
@@ -101,7 +99,6 @@ a.tag.label-default {
 #activity-grid {
     position: relative;
     overflow-x: auto;
-    padding-bottom: 10px;
 }
 
 .activity-months {
@@ -140,7 +137,7 @@ a.tag.label-default {
 }
 
 .activity-day.empty {
-    background-color: transparent;
+    background-color: transparent !important;
     cursor: default;
 }
 
