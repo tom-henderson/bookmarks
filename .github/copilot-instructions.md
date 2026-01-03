@@ -35,7 +35,7 @@ python bookmarks/manage.py runserver
 ### Docker Development
 Multi-stage build ([Dockerfile](../Dockerfile)):
 1. `base`: Python deps + git for private package (django-common)
-2. `node`: npm install for Bootstrap/jQuery/Chart.js
+2. `node`: npm install for Bootstrap/jQuery
 3. `staticfiles`: Runs collectstatic combining npm + Django statics
 4. Final: Runtime with gunicorn, auto-creates admin user on first run
 
@@ -78,7 +78,7 @@ Custom commands in `bookmarks/management/commands/` - example: `importbookmarks.
 ## Dependencies
 - **Private Repo**: Requires `django-common` from GitHub (git+https://...) - contains shared mixins
 - **Pinned Versions**: Django 5.1.3, DRF 3.15.2, Bootstrap 3.4.1 - avoid upgrading without testing frontend compatibility
-- **Frontend Stack**: jQuery 3.5.1 + typeahead.js for tag autocomplete, bootstrap-tokenfield for tag input, Chart.js 2.x for visualizations
+- **Frontend Stack**: jQuery 3.5.1 + typeahead.js for tag autocomplete, bootstrap-tokenfield for tag input
 
 ## Deployment Notes
 - GitHub Actions builds on master push → tags with `BASE_VERSION.RUN_NUMBER` → pushes to GitHub Packages
