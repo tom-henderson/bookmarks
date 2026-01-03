@@ -7,7 +7,7 @@
     {% for year_data in activity_years %}
     <div class="row">
         <div class="col-xs-12">
-          <h3>{{ year_data.year }} <small>Bookmark activity</small></h3>
+          <h3>{{ year_data.year }}</h3>
           {% with activity_chart=year_data.chart %}
             {% include "bookmarks/activity_chart.html" %}
           {% endwith %}
