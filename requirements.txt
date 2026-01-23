@@ -21,4 +21,4 @@ markdown==3.7
 
 git+https://github.com/tom-henderson/django-common
 
-gunicorn==23.0.0
+gunicorn==24.0.0
