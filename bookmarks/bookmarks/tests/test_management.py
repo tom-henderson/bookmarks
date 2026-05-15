@@ -29,77 +29,48 @@ SAMPLE_DATA = [
 ]
 
 
-def _write_json_file(data):
-    """Write data to a temp file and return its path. Caller must delete."""
-    f = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
-    json.dump(data, f)
-    f.close()
-    return f.name
-
-
 class ImportBookmarksCommandTests(TestCase):
+    def setUp(self):
+        self._tmp = tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False)
+        self._tmp.close()
+
+    def tearDown(self):
+        os.unlink(self._tmp.name)
+
+    def _write(self, data):
+        with open(self._tmp.name, 'w') as f:
+            json.dump(data, f)
+        return self._tmp.name
+
     def test_import_creates_bookmarks(self):
-        path = _write_json_file(SAMPLE_DATA)
-        try:
-            call_command('importbookmarks', path)
-        finally:
-            os.unlink(path)
+        call_command('importbookmarks', self._write(SAMPLE_DATA))
         self.assertEqual(Bookmark.objects.count(), 2)
 
     def test_import_sets_url(self):
-        path = _write_json_file(SAMPLE_DATA[:1])
-        try:
-            call_command('importbookmarks', path)
-        finally:
-            os.unlink(path)
-        b = Bookmark.objects.get()
-        self.assertEqual(b.url, 'https://first.example.com')
+        call_command('importbookmarks', self._write(SAMPLE_DATA[:1]))
+        self.assertEqual(Bookmark.objects.get().url, 'https://first.example.com')
 
     def test_import_sets_title(self):
-        path = _write_json_file(SAMPLE_DATA[:1])
-        try:
-            call_command('importbookmarks', path)
-        finally:
-            os.unlink(path)
-        b = Bookmark.objects.get()
-        self.assertEqual(b.title, 'First Bookmark')
+        call_command('importbookmarks', self._write(SAMPLE_DATA[:1]))
+        self.assertEqual(Bookmark.objects.get().title, 'First Bookmark')
 
     def test_import_sets_description(self):
-        path = _write_json_file(SAMPLE_DATA[:1])
-        try:
-            call_command('importbookmarks', path)
-        finally:
-            os.unlink(path)
-        b = Bookmark.objects.get()
-        self.assertEqual(b.description, 'First description')
+        call_command('importbookmarks', self._write(SAMPLE_DATA[:1]))
+        self.assertEqual(Bookmark.objects.get().description, 'First description')
 
     def test_import_sets_private(self):
-        path = _write_json_file(SAMPLE_DATA)
-        try:
-            call_command('importbookmarks', path)
-        finally:
-            os.unlink(path)
-        public = Bookmark.objects.get(url='https://first.example.com')
-        private = Bookmark.objects.get(url='https://second.example.com')
-        self.assertFalse(public.private)
-        self.assertTrue(private.private)
+        call_command('importbookmarks', self._write(SAMPLE_DATA))
+        self.assertFalse(Bookmark.objects.get(url='https://first.example.com').private)
+        self.assertTrue(Bookmark.objects.get(url='https://second.example.com').private)
 
     def test_import_sets_tags(self):
-        path = _write_json_file(SAMPLE_DATA[:1])
-        try:
-            call_command('importbookmarks', path)
-        finally:
-            os.unlink(path)
-        b = Bookmark.objects.get()
-        self.assertIn('python', b.tags.names())
-        self.assertIn('web', b.tags.names())
+        call_command('importbookmarks', self._write(SAMPLE_DATA[:1]))
+        tags = Bookmark.objects.get().tags.names()
+        self.assertIn('python', tags)
+        self.assertIn('web', tags)
 
     def test_import_empty_array_creates_nothing(self):
-        path = _write_json_file([])
-        try:
-            call_command('importbookmarks', path)
-        finally:
-            os.unlink(path)
+        call_command('importbookmarks', self._write([]))
         self.assertEqual(Bookmark.objects.count(), 0)
 
     def test_import_nonexistent_file_raises(self):
