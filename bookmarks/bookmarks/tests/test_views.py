@@ -1,5 +1,6 @@
 import os
 from datetime import timedelta
+from pathlib import Path
 
 from django.contrib.auth.models import User
 from django.contrib.staticfiles import finders
@@ -333,18 +334,7 @@ class AuthViewTests(TestCase):
         self.assertEqual(response.status_code, 302)
 
 
-NODE_MODULES = os.path.join(
-    os.path.dirname(  # project root
-        os.path.dirname(  # bookmarks/
-            os.path.dirname(  # bookmarks/bookmarks/
-                os.path.dirname(  # bookmarks/bookmarks/bookmarks/
-                    os.path.abspath(__file__)
-                )
-            )
-        )
-    ),
-    'node_modules'
-)
+NODE_MODULES = Path(__file__).parents[3] / 'node_modules'
 
 
 @skipIf(not os.path.isdir(NODE_MODULES), 'node_modules not installed; skipping static file tests')
