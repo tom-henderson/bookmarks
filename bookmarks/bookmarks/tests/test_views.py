@@ -310,18 +310,18 @@ class AuthViewTests(TestCase):
         self.user = User.objects.create_user('testuser', 'test@example.com', 'password')
 
     def test_login_page_get(self):
-        response = self.client.get('/login/')
+        response = self.client.get(reverse('log_in'))
         self.assertEqual(response.status_code, 200)
 
     def test_login_post_valid_credentials(self):
-        response = self.client.post('/login/', {
+        response = self.client.post(reverse('log_in'), {
             'username': 'testuser',
             'password': 'password',
         })
         self.assertEqual(response.status_code, 302)
 
     def test_login_post_invalid_credentials(self):
-        response = self.client.post('/login/', {
+        response = self.client.post(reverse('log_in'), {
             'username': 'testuser',
             'password': 'wrongpassword',
         })
@@ -329,7 +329,7 @@ class AuthViewTests(TestCase):
 
     def test_logout_redirects(self):
         self.client.force_login(self.user)
-        response = self.client.get('/logout/')
+        response = self.client.get(reverse('log_out'))
         self.assertEqual(response.status_code, 302)
 
 
