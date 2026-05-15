@@ -48,11 +48,12 @@ class APIBookmarksTests(APITestCase):
 
 class APIRecentBookmarksTests(APITestCase):
     def setUp(self):
+        past = timezone.now() - timezone.timedelta(days=365)
         for i in range(15):
             _make_bookmark(
                 f'https://recent{i}.com',
                 f'Recent {i}',
-                date_added=timezone.now()
+                date_added=past
             )
         _make_bookmark('https://private-recent.com', 'Private Recent', private=True)
 
@@ -78,20 +79,20 @@ class APIRecentBookmarksTests(APITestCase):
         self.assertNotIn('Access-Control-Allow-Origin', response)
 
     def test_ordering_newest_first(self):
-        # Create two bookmarks with known different timestamps
-        older = _make_bookmark(
+        _make_bookmark(
             'https://older-recent.com', 'Older',
             date_added=timezone.now() - timezone.timedelta(hours=1)
         )
-        newer = _make_bookmark(
+        _make_bookmark(
             'https://newer-recent.com', 'Newer',
             date_added=timezone.now()
         )
         response = self.client.get('/api/recent/')
         urls = [b['url'] for b in response.data]
-        if 'https://newer-recent.com' in urls and 'https://older-recent.com' in urls:
-            self.assertLess(urls.index('https://newer-recent.com'),
-                            urls.index('https://older-recent.com'))
+        self.assertIn('https://newer-recent.com', urls)
+        self.assertIn('https://older-recent.com', urls)
+        self.assertLess(urls.index('https://newer-recent.com'),
+                        urls.index('https://older-recent.com'))
 
 
 class APITagsTests(APITestCase):
