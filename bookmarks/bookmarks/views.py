@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import FormView
 from django.views.generic import TemplateView, ListView
 from django.views.generic import CreateView, UpdateView
@@ -85,7 +85,7 @@ class BookmarkTagList(BookmarksList):
         return queryset.filter(tags__slug=self.kwargs.get('slug'))
 
     def get_context_data(self, **kwargs):
-        tag = Tag.objects.get(slug=self.kwargs.get('slug'))
+        tag = get_object_or_404(Tag, slug=self.kwargs.get('slug'))
 
         context = super(BookmarkTagList, self).get_context_data(**kwargs)
         context['title'] = "Bookmarks - {}".format(tag.name)

@@ -11,7 +11,11 @@ on:
       - master
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
   build:
+    needs: test
     uses: ./.github/workflows/container-build.yml
     with:
       image-name: bookmarks

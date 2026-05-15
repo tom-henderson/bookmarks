@@ -26,6 +26,15 @@ Bookmark manager to replace del.icio.us.
 ### Integrations
 - Heroku Slack Webhooks
 
+## Testing
+
+```bash
+pip install -r requirements.txt && npm install
+cd bookmarks && DJANGO_SETTINGS_MODULE=config.settings.test python manage.py test bookmarks api
+```
+
+See [TESTING.md](TESTING.md) for full details on what is tested and how CI works.
+
 ## Bookmarklet
 ```
 javascript:(function($){url='http://127.0.0.1:8000/new/';url+='?url='+encodeURIComponent(window.location.href);url+='&title='+encodeURIComponent(document.title);url+='&description='+encodeURIComponent(''+(window.getSelection?window.getSelection():document.getSelection?document.getSelection():document.selection.createRange().text));window.open(url,"_self");})();
