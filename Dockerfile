@@ -1,5 +1,5 @@
 # Base image with python dependencies
-FROM python:3.10-slim-bullseye as base
+FROM python:3.12-slim-bullseye as base
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 RUN apt-get update && \
