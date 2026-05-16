@@ -17,7 +17,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('path')
 
-    def handle(self, **options):
+    def handle(self, *args, **options):
         with open(options['path'], 'r') as file:
             data = json.load(file)
 

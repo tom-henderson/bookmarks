@@ -18,10 +18,10 @@ class Bookmark(models.Model):
     private = models.BooleanField(default=False)
     url = models.URLField(max_length=500)
 
-    def __unicode__(self):
+    def __str__(self):
         return "{}: {} [{}]".format(
             self.pk,
-            self.title[:40],
+            (self.title or '')[:40],
             self.date_added
         )
 
