@@ -13,32 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: 'pip'
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Set up Node 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install npm packages
-        run: npm install
+      - name: Build Docker image
+        run: docker build -t bookmarks-test .
 
       - name: Run Django tests
-        working-directory: bookmarks
-        env:
-          DJANGO_SETTINGS_MODULE: config.settings.test
-        run: python manage.py test bookmarks api --verbosity=2
-
-      - name: Verify static file collection
-        working-directory: bookmarks
-        env:
-          DJANGO_SETTINGS_MODULE: config.settings.test
-        run: python manage.py collectstatic --noinput
+        run: docker run --rm -e DJANGO_SETTINGS_MODULE=config.settings.test bookmarks-test python /app/manage.py test bookmarks api --verbosity=2
