@@ -1,3 +1,7 @@
+import os
+import re
+import importlib.metadata
+
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import FormView
 from django.views.generic import TemplateView, ListView
@@ -5,6 +9,8 @@ from django.views.generic import CreateView, UpdateView
 from django.db.models import Q, Count
 from django.db.models.functions import TruncDate
 from django import forms
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.conf import settings
 from datetime import datetime, timedelta
 from calendar import month_abbr
 
@@ -128,6 +134,47 @@ class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
     model = Bookmark
     form_class = BookmarkForm
     success_url = '/'
+
+
+def _get_package_versions():
+    req_path = os.path.join(settings.PROJECT_ROOT, 'requirements.txt')
+    packages = []
+    try:
+        with open(req_path) as fh:
+            for raw_line in fh:
+                line = raw_line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                if line.startswith('git+') or '://' in line:
+                    packages.append({'name': line, 'required': 'VCS/URL', 'installed': 'N/A'})
+                    continue
+                parts = re.split(r'(==|>=|<=|~=|!=|>|<)', line, maxsplit=1)
+                pkg_name = parts[0].strip()
+                req_spec = ''.join(parts[1:]).strip() if len(parts) > 1 else ''
+                try:
+                    installed = importlib.metadata.version(pkg_name)
+                except importlib.metadata.PackageNotFoundError:
+                    installed = 'not found'
+                packages.append({'name': pkg_name, 'required': req_spec or 'any', 'installed': installed})
+    except FileNotFoundError:
+        pass
+    return packages
+
+
+class AppVersion(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
+    template_name = 'bookmarks/app_version.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'App Version'
+        context['build_version'] = os.environ.get('BUILD_VERSION', 'dev')
+        context['build_date'] = os.environ.get('BUILD_DATE', 'N/A')
+        context['build_commit'] = os.environ.get('BUILD_COMMIT', 'N/A')
+        context['packages'] = _get_package_versions()
+        return context
 
 
 class Charts(TemplateView):

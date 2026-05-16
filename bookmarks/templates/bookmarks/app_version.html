@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>App Version</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-bordered table-condensed">
+        <tbody>
+          <tr><th class="col-xs-3">Build Version</th><td>{{ build_version }}</td></tr>
+          <tr><th>Build Date</th><td>{{ build_date }}</td></tr>
+          <tr><th>Git Commit</th><td><code>{{ build_commit }}</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Python Packages</h3>
+      <table class="table table-bordered table-condensed table-striped">
+        <thead>
+          <tr><th>Package</th><th>Required</th><th>Installed</th></tr>
+        </thead>
+        <tbody>
+          {% for pkg in packages %}
+          <tr>
+            <td>{{ pkg.name }}</td>
+            <td><code>{{ pkg.required }}</code></td>
+            <td>
+              {% if pkg.installed == 'not found' or pkg.installed == 'N/A' %}
+                <span class="label label-warning">{{ pkg.installed }}</span>
+              {% else %}
+                {{ pkg.installed }}
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

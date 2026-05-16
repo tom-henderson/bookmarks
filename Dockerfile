@@ -22,6 +22,12 @@ RUN python /app/manage.py collectstatic --noinput
 
 # Runtime image
 FROM base
+ARG BUILD_VERSION=dev
+ARG BUILD_DATE=N/A
+ARG BUILD_COMMIT=N/A
+ENV BUILD_VERSION=${BUILD_VERSION}
+ENV BUILD_DATE=${BUILD_DATE}
+ENV BUILD_COMMIT=${BUILD_COMMIT}
 ENV SQLITE_DATABASE_PATH=/data/db.sqlite3
 COPY --from=staticfiles /app /app
 COPY entrypoint.sh /entrypoint.sh
