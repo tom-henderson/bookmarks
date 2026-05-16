@@ -17,7 +17,7 @@ RUN npm install
 # Build staticfiles
 FROM base as staticfiles
 COPY bookmarks /app
-COPY --from=node /node_modules /app
+COPY --from=node /node_modules /node_modules
 RUN python /app/manage.py collectstatic --noinput
 
 # Runtime image
