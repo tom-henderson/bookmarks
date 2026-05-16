@@ -1,9 +1,9 @@
 Django==6.0.5
 six==1.16.0
-sqlparse==0.5.1
+sqlparse==0.5.5
 
 # Whitenoise: Staticfile hosting
-whitenoise==6.8.2
+whitenoise==6.12.0
 django-npm==1.0.0
 
 # Tagging
@@ -13,12 +13,12 @@ django-taggit==6.1.0
 django-taggit-helpers==0.1.4
 
 # Django REST Framework
-djangorestframework==3.15.2
+djangoresutframework==3.17.1
 
-requests==2.32.3
+requests==2.34.2
 
-markdown==3.7
+markdown==3.10.2
 
 git+https://github.com/tom-henderson/django-common
 
-gunicorn==23.0.0
+gunicorn==26.0.0
