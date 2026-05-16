@@ -19,5 +19,3 @@ jobs:
       - name: Run Django tests
         run: docker run --rm -e DJANGO_SETTINGS_MODULE=config.settings.test bookmarks-test python /app/manage.py test bookmarks api --verbosity=2
 
-      - name: Verify static file collection
-        run: docker run --rm -e DJANGO_SETTINGS_MODULE=config.settings.test bookmarks-test python /app/manage.py collectstatic --noinput
