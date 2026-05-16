@@ -2,7 +2,7 @@ from django.urls import include, path
 
 from .views import BookmarksList, BookmarkTagList
 from .views import BookmarkCreate, BookmarkUpdate
-from .views import Charts
+from .views import Charts, AppVersion
 
 urlpatterns = [
     path('', BookmarksList.as_view(), name='index'),
@@ -10,4 +10,5 @@ urlpatterns = [
     path('new/', BookmarkCreate.as_view(), name='bookmark_create'),
     path('edit/<int:pk>/', BookmarkUpdate.as_view(), name='bookmark_update'),
     path('charts/', Charts.as_view(), name='charts'),
+    path('version/', AppVersion.as_view(), name='app_version'),
 ]

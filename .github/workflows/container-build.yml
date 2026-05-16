@@ -47,7 +47,11 @@ jobs:
           IMAGE_ID: "ghcr.io/${{ github.repository }}/${{ inputs.image-name }}"
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          docker build -t ${IMAGE_ID}:${VERSION} .
+          docker build \
+            --build-arg BUILD_VERSION=${VERSION} \
+            --build-arg BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ) \
+            --build-arg BUILD_COMMIT=${GITHUB_SHA} \
+            -t ${IMAGE_ID}:${VERSION} .
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           docker push ${IMAGE_ID}:${VERSION}
 

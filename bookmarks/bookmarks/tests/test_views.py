@@ -334,6 +334,87 @@ class AuthViewTests(TestCase):
         self.assertEqual(response.status_code, 302)
 
 
+class AppVersionViewTests(TestCase):
+    def setUp(self):
+        self.superuser = User.objects.create_superuser(
+            'superuser', 'super@example.com', 'password'
+        )
+        self.staff_user = User.objects.create_user(
+            'staffuser', 'staff@example.com', 'password', is_staff=True
+        )
+        self.regular_user = User.objects.create_user(
+            'regularuser', 'regular@example.com', 'password'
+        )
+
+    def test_anonymous_redirects_to_login(self):
+        response = self.client.get(reverse('app_version'))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('/login/', response['Location'])
+
+    def test_superuser_returns_200(self):
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('app_version'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_regular_user_returns_403(self):
+        self.client.force_login(self.regular_user)
+        response = self.client.get(reverse('app_version'))
+        self.assertEqual(response.status_code, 403)
+
+    def test_staff_non_superuser_returns_403(self):
+        self.client.force_login(self.staff_user)
+        response = self.client.get(reverse('app_version'))
+        self.assertEqual(response.status_code, 403)
+
+    def test_correct_template_used(self):
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('app_version'))
+        self.assertTemplateUsed(response, 'bookmarks/app_version.html')
+
+    def test_context_contains_build_info(self):
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('app_version'))
+        self.assertIn('build_version', response.context)
+        self.assertIn('build_date', response.context)
+        self.assertIn('build_commit', response.context)
+
+    def test_build_version_defaults_to_dev(self):
+        os.environ.pop('BUILD_VERSION', None)
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('app_version'))
+        self.assertEqual(response.context['build_version'], 'dev')
+
+    def test_build_version_reads_env_var(self):
+        os.environ['BUILD_VERSION'] = '2.3.4'
+        try:
+            self.client.force_login(self.superuser)
+            response = self.client.get(reverse('app_version'))
+            self.assertEqual(response.context['build_version'], '2.3.4')
+        finally:
+            os.environ.pop('BUILD_VERSION', None)
+
+    def test_context_contains_packages_list(self):
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('app_version'))
+        self.assertIn('packages', response.context)
+        self.assertIsInstance(response.context['packages'], list)
+
+    def test_packages_have_required_keys(self):
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('app_version'))
+        packages = response.context['packages']
+        if packages:
+            pkg = packages[0]
+            self.assertIn('name', pkg)
+            self.assertIn('required', pkg)
+            self.assertIn('installed', pkg)
+
+    def test_context_title(self):
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('app_version'))
+        self.assertEqual(response.context['title'], 'App Version')
+
+
 NODE_MODULES = Path(__file__).parents[3] / 'node_modules'
 
 
