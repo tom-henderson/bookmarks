@@ -305,6 +305,24 @@ class ChartsViewTests(TestCase):
         response = self.client.get(reverse('charts'))
         self.assertGreater(len(response.context['activity_years']), 0)
 
+    def test_older_year_bookmark_shows_data_in_chart(self):
+        # Regression test: bookmarks from older years must appear in the chart,
+        # not be silently dropped by a per-year query limit.
+        self.client.force_login(self.user)
+        old_date = timezone.make_aware(timezone.datetime(2019, 6, 15, 12, 0, 0))
+        _make_bookmark('https://old.com', 'Old Bookmark', date_added=old_date)
+        response = self.client.get(reverse('charts'))
+        years = {entry['year']: entry for entry in response.context['activity_years']}
+        self.assertIn(2019, years)
+        # Verify that at least one day in the 2019 chart has a non-zero count.
+        days_with_data = [
+            day
+            for week in years[2019]['chart']['weeks']
+            for day in week
+            if day.get('count', 0) > 0
+        ]
+        self.assertGreater(len(days_with_data), 0)
+
 
 class AuthViewTests(TestCase):
     def setUp(self):
