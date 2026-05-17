@@ -193,3 +193,28 @@ class BuildActivityChartTests(TestCase):
         result = build_activity_chart(public_qs, self.start)
         day = self._get_day_for_date(result, target)
         self.assertEqual(day['count'], 1)
+
+    def test_precomputed_activity_dict_used_when_provided(self):
+        target = self.start + timedelta(days=10)
+        activity_dict = {str(target): 5}
+        result = build_activity_chart(self.qs, self.start, activity_dict=activity_dict)
+        day = self._get_day_for_date(result, target)
+        self.assertIsNotNone(day)
+        self.assertEqual(day['count'], 5)
+        self.assertEqual(day['level'], 3)
+
+    def test_precomputed_dict_with_cross_year_data(self):
+        # Verify that passing a dict with data from multiple years still shows
+        # only the relevant year's data in the chart (via the date range grid).
+        prev_year_date = self.start - timedelta(days=5)
+        target = self.start + timedelta(days=10)
+        activity_dict = {
+            str(prev_year_date): 10,  # outside chart range
+            str(target): 3,           # inside chart range
+        }
+        result = build_activity_chart(self.qs, self.start, activity_dict=activity_dict)
+        day = self._get_day_for_date(result, target)
+        self.assertEqual(day['count'], 3)
+        # The out-of-range date should not appear
+        out_of_range = self._get_day_for_date(result, prev_year_date)
+        self.assertIsNone(out_of_range)

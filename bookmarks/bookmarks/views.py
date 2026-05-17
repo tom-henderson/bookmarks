@@ -197,17 +197,28 @@ class Charts(TemplateView):
         # Get the year range
         earliest_year = earliest_bookmark.date_added.year
         current_year = datetime.now().year
-        
-        # Build one chart per calendar year
+
+        # Fetch all bookmark activity in a single query rather than one per year,
+        # which avoids hitting any per-request result limits on older date ranges.
+        all_activity = (
+            queryset
+            .annotate(date=TruncDate('date_added'))
+            .values('date')
+            .annotate(count=Count('id'))
+            .order_by('date')
+        )
+        activity_dict = {str(item['date']): item['count'] for item in all_activity}
+
+        # Build one chart per calendar year using the pre-fetched data
         activity_years = []
         for year in range(earliest_year, current_year + 1):
             start_date = datetime(year, 1, 1).date()
-            chart_data = build_activity_chart(queryset, start_date)
+            chart_data = build_activity_chart(queryset, start_date, activity_dict=activity_dict)
             activity_years.append({
                 'year': year,
                 'chart': chart_data
             })
-        
+
         # Reverse so most recent year is first
         activity_years.reverse()
         

@@ -4,33 +4,37 @@ from django.db.models import Count
 from django.db.models.functions import TruncDate
 
 
-def build_activity_chart(queryset, start_date):
+def build_activity_chart(queryset, start_date, activity_dict=None):
     """
     Build activity chart data structure for exactly one year of data.
-    
+
     Args:
         queryset: Django queryset to aggregate (e.g., Bookmark.objects.filter(...))
         start_date: datetime.date object for chart start (typically Jan 1)
-    
+        activity_dict: optional pre-computed {date_str: count} dict; if provided,
+                       no database query is issued (used when the caller has already
+                       fetched all activity data in a single query).
+
     Returns:
-        Dict with 'weeks' (list of weeks, each containing day dicts) 
+        Dict with 'weeks' (list of weeks, each containing day dicts)
         and 'month_labels' (list of month label dicts with offset positions).
     """
     # Calculate end date as exactly 1 year from start
     end_date = start_date + timedelta(days=365)
-    
-    # Query database for bookmark counts by date
-    activity_data = queryset.filter(
-        date_added__date__gte=start_date,
-        date_added__date__lte=end_date
-    ).annotate(
-        date=TruncDate('date_added')
-    ).values('date').annotate(
-        count=Count('id')
-    ).order_by('date')
-    
-    # Convert to dict for O(1) lookup
-    activity_dict = {str(item['date']): item['count'] for item in activity_data}
+
+    if activity_dict is None:
+        # Query database for bookmark counts by date
+        activity_data = queryset.filter(
+            date_added__date__gte=start_date,
+            date_added__date__lte=end_date
+        ).annotate(
+            date=TruncDate('date_added')
+        ).values('date').annotate(
+            count=Count('id')
+        ).order_by('date')
+
+        # Convert to dict for O(1) lookup
+        activity_dict = {str(item['date']): item['count'] for item in activity_data}
     
     # Build grid of all dates in the date range
     activity_grid = []
