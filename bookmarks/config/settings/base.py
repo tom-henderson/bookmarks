@@ -148,21 +148,18 @@ NPM_STATIC_FILES_PREFIX = 'npm'
 NPM_FILE_PATTERNS = {
     'bootstrap': [
         'dist/css/*.min.*',
-        'dist/fonts/*',
-        'dist/js/*.min.*',
-    ],
-    'bootstrap-datepicker': [
-        'dist/css/*.min.*',
-        'dist/js/*.min.*',
-        'dist/locales/*',
-    ],
-    'bootstrap-tokenfield': [
-        'dist/*.min.js',
-        'dist/css/*.min.css',
+        'dist/js/bootstrap.bundle.min.*',
     ],
     'bootswatch': [
-        'slate/bootstrap.min.css',
-        'fonts/*',
+        'dist/slate/bootstrap.min.css',
+    ],
+    '@yaireo/tagify': [
+        'dist/tagify.js',
+        'dist/tagify.css',
+    ],
+    'flatpickr': [
+        'dist/flatpickr.min.js',
+        'dist/flatpickr.min.css',
     ],
     'font-awesome': [
         'css/*.min.*',
@@ -170,9 +167,6 @@ NPM_FILE_PATTERNS = {
     ],
     'jquery': [
         'dist/jquery.min.js',
-    ],
-    'typeahead.js': [
-        'dist/typeahead.bundle.min.js',
     ],
 }
 

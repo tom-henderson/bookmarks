@@ -7,20 +7,20 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       {% include 'bookmarks/activity_chart.html' %}
     </div>
   </div>
 
   {% for bookmark in bookmarks %}
   <div class="row bookmark">
-    <div class="col-xs-12">
+    <div class="col-12">
       <h4><a href="{{bookmark.url}}">{{bookmark.title}}</a>
       {% if bookmark.date_added %}
         <small>{{bookmark.date_added}}
         {% if user.is_staff %}
           <span class="admin-menu fade">
-          <a href="{% url 'bookmark_update' bookmark.id %}?{% url_replace request 'next' request.get_full_path %}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+          <a href="{% url 'bookmark_update' bookmark.id %}?{% url_replace request 'next' request.get_full_path %}"><span class="fa fa-cog" aria-hidden="true"></span></a>
           </span>
         {% endif %}
         </small>
@@ -29,62 +29,64 @@
       {% if bookmark.description %}
         {{bookmark.description | render_markdown}}
       {%endif%}
-      {% if bookmark.private %}<span class="label label-warning">private</span>{% endif %}
+      {% if bookmark.private %}<span class="badge bg-warning text-dark">private</span>{% endif %}
       {% for tag in bookmark.tags.all %}
-        <a href="{% url 'tag' tag.slug %}" class="tag label
+        <a href="{% url 'tag' tag.slug %}" class="tag badge
         {% if tag.slug == tag_filter %}
-          label-primary
+          bg-primary
         {% elif search|lower in tag.name %}
-          label-success
+          bg-success
         {% else %}
-          label-default
+          bg-secondary
         {% endif %}
-        ">{{tag.name}}</a> 
+        ">{{tag.name}}</a>
       {% endfor %}
       <br /><br />
     </div>
-  </div>  
+  </div>
   {% endfor %}
 
 
 
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       {% include 'bookmarks/pagination-reverse.html' %}
     </div>
-  </div>  
+  </div>
 
 </div>
 
 
-<form action="" method="get" class="form-horizontal modal fade" id="filter-form">
+<form action="" method="get" class="modal fade" id="filter-form">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Filter</h4>
+        <h5 class="modal-title">Filter</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
-        <div class="form-group">
-          <label class="col-sm-3 control-label" for="date-range-select">Date Added</label>
-          <div class="col-sm-9 input-daterange input-group" id="date-added-range-select">
-            <input type="text" class="form-control" name="date_added_from" placeholder="From" 
-              {% if date_added_from %}
-                value="{{date_added_from}}"
-              {% endif %}>
-            <span class="input-group-addon">to</span>
-            <input type="text" class="form-control" name="date_added_to" placeholder="To" 
-              {% if date_added_to %}
-                value="{{date_added_to}}"
-              {% endif %}>
+        <div class="mb-3 row">
+          <label class="col-sm-3 col-form-label" for="date-added-range-select">Date Added</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input type="text" class="form-control" id="date-added-from" name="date_added_from" placeholder="From"
+                {% if date_added_from %}
+                  value="{{date_added_from}}"
+                {% endif %}>
+              <span class="input-group-text">to</span>
+              <input type="text" class="form-control" id="date-added-to" name="date_added_to" placeholder="To"
+                {% if date_added_to %}
+                  value="{{date_added_to}}"
+                {% endif %}>
+            </div>
           </div>
         </div>
 
       </div>
       <div class="modal-footer">
-        <a type="button" class="btn btn-default" data-dismiss="modal">Cancel</a>
-        <a id="reset" type="button" class="btn btn-default">Reset</a>
+        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+        <a id="reset" type="button" class="btn btn-secondary">Reset</a>
         <button type="submit" class="btn btn-primary">Apply</button>
       </div>
     </div>
@@ -94,10 +96,10 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'npm/flatpickr/dist/flatpickr.min.js' %}"></script>
 <script language="javascript">
   $(document).ready(function(){
-    
+
     // Add click handlers for activity days
     $('.activity-day[data-date]').on('click', function() {
       var date = $(this).data('date');
@@ -122,18 +124,23 @@
                 this.checked = false;
         }
       });
+      if (window._flatpickrFrom) window._flatpickrFrom.clear();
+      if (window._flatpickrTo) window._flatpickrTo.clear();
     });
 
-    var today = new Date();
-    $('#date-added-range-select').datepicker({
-      format: "yyyy-mm-dd",
-      endDate: today,
+    window._flatpickrFrom = flatpickr('#date-added-from', {
+      dateFormat: "Y-m-d",
+      maxDate: "today",
+    });
+    window._flatpickrTo = flatpickr('#date-added-to', {
+      dateFormat: "Y-m-d",
+      maxDate: "today",
     });
 
     $(".bookmark").hover(
       function () {
         $(this).find('.admin-menu').removeClass('fade');
-      }, 
+      },
       function () {
         $(this).find('.admin-menu').addClass('fade');
       }
