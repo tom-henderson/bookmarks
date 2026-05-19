@@ -12,78 +12,49 @@ h4 small {
 
 /* Overrides for dark mode */
 @media (prefers-color-scheme: dark) {
-    .label-primary {
-        background-color: #337ab7;
+    .badge.bg-primary {
+        background-color: #337ab7 !important;
     }
 
-    .label-primary[href]:hover,
-    .label-primary[href]:focus {
-        background-color: #286090;
+    .badge.bg-primary:hover,
+    .badge.bg-primary:focus {
+        background-color: #286090 !important;
     }
 
     .navbar {
         background-image: none;
     }
+
+    .tagify {
+        --tag-bg: #3a3f44;
+        --tag-text-color: #c8c8c8;
+        --tag-border-color: #555;
+    }
+
+    .tagify__dropdown {
+        background: #272b30;
+        border-color: #3a3f44;
+    }
+
+    .tagify__dropdown__item {
+        color: #c8c8c8;
+    }
+
+    .tagify__dropdown__item--active {
+        background: #3a3f44;
+    }
 }
 
-.twitter-typeahead .tt-query,
-.twitter-typeahead .tt-hint {
-    margin-bottom: 0;
+a.tag.badge {
+    text-decoration: none;
 }
 
-.twitter-typeahead .tt-hint
-{
-    display: none;
+a.tag.badge.bg-secondary {
+    background-color: #999 !important;
 }
 
-.tt-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    list-style: none;
-    font-size: 14px;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    background-clip: padding-box;
-    cursor: pointer;
-}
-
-.tt-suggestion {
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    font-weight: normal;
-    line-height: 1.428571429;
-    color: #333333;
-    white-space: nowrap;
-}
-
-.tt-suggestion:hover,
-.tt-suggestion:focus {
-  color: #ffffff;
-  text-decoration: none;
-  outline: 0;
-  background-color: #428bca;
-}
-
-.input-daterange[class*=col-] {
-    width: 75%;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-a.tag.label-default {
-    background-color: #999;
+a.tag.badge:hover {
+    opacity: 0.85;
 }
 
 /* Activity Chart Styles */
@@ -165,23 +136,23 @@ a.tag.label-default {
     border: 1px solid #337ab7;
 }
 
-@media (prefers-color-scheme: dark) {    
+@media (prefers-color-scheme: dark) {
     .activity-day.level-0 {
         background-color: #161b22;
     }
-    
+
     .activity-day.level-1 {
         background-color: #0a3d62;
     }
-    
+
     .activity-day.level-2 {
         background-color: #1e5f8c;
     }
-    
+
     .activity-day.level-3 {
         background-color: #2874a6;
     }
-    
+
     .activity-day.level-4 {
         background-color: #3498db;
     }
