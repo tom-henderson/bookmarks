@@ -306,15 +306,18 @@ class ChartsViewTests(TestCase):
         self.assertGreater(len(response.context['activity_years']), 0)
 
     def test_older_year_bookmark_shows_data_in_chart(self):
-        # Regression test: bookmarks from older years must appear in the chart,
-        # not be silently dropped by a per-year query limit.
+        # Regression test: bookmarks stored with the old ISO 8601 T-separator
+        # format ('2019-06-15T12:00:00+00:00') must appear in the chart.
+        # Django's typecast_timestamp() only handles space-separated strings;
+        # the T-format silently produced NULL from TruncDate, hiding all
+        # pre-2022 history.  Store directly via .update() to bypass the ORM's
+        # format normalisation and reproduce the exact historical storage format.
         self.client.force_login(self.user)
-        old_date = timezone.make_aware(timezone.datetime(2019, 6, 15, 12, 0, 0))
-        _make_bookmark('https://old.com', 'Old Bookmark', date_added=old_date)
+        bm = _make_bookmark('https://old.com', 'Old Bookmark')
+        Bookmark.objects.filter(pk=bm.pk).update(date_added='2019-06-15T12:00:00+00:00')
         response = self.client.get(reverse('charts'))
         years = {entry['year']: entry for entry in response.context['activity_years']}
         self.assertIn(2019, years)
-        # Verify that at least one day in the 2019 chart has a non-zero count.
         days_with_data = [
             day
             for week in years[2019]['chart']['weeks']
