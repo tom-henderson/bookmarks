@@ -128,6 +128,7 @@ THIRD_PARTY_APPS = (
     'taggit_helpers',
     'rest_framework',
     'django_common',
+    'template_partials',
 )
 
 
@@ -170,6 +171,9 @@ NPM_FILE_PATTERNS = {
     ],
     'jquery': [
         'dist/jquery.min.js',
+    ],
+    'htmx.org': [
+        'dist/htmx.min.js',
     ],
     'typeahead.js': [
         'dist/typeahead.bundle.min.js',

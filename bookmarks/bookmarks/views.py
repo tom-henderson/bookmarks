@@ -52,6 +52,11 @@ class BookmarksList(ListView):
 
         return queryset.prefetch_related('tags')
 
+    def get_template_names(self):
+        if self.request.GET.get('partial') == 'filter_modal':
+            return ['bookmarks/bookmark_list.html#filter_modal']
+        return super().get_template_names()
+
     def get_context_data(self, **kwargs):
         context = super(BookmarksList, self).get_context_data(**kwargs)
         context['title'] = "Bookmarks"
@@ -116,9 +121,13 @@ class BookmarkForm(BootStrapForm):
 
 
 class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
-    template_name = 'form_view.html'
     form_class = BookmarkForm
     success_url = '/'
+
+    def get_template_names(self):
+        if self.request.GET.get('modal'):
+            return ['form_view.html#modal_form']
+        return ['form_view.html']
 
     def get_initial(self):
         initial = {
@@ -130,10 +139,19 @@ class BookmarkCreate(LoginRequiredMixin, NextOnSuccessMixin, CreateView):
 
 
 class BookmarkUpdate(LoginRequiredMixin, NextOnSuccessMixin, UpdateView):
-    template_name = 'form_view.html'
     model = Bookmark
     form_class = BookmarkForm
     success_url = '/'
+
+    def get_template_names(self):
+        if self.request.GET.get('modal'):
+            return ['form_view.html#modal_form']
+        return ['form_view.html']
+
+    def get_context_data(self, **kwargs):
+        context = super(BookmarkUpdate, self).get_context_data(**kwargs)
+        context['subheading'] = f"Edit: {self.object.title}"
+        return context
 
 
 def _get_package_versions():
@@ -182,18 +200,18 @@ class Charts(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Charts, self).get_context_data(**kwargs)
-        
+
         queryset = Bookmark.objects.all()
         if not self.request.user.is_authenticated:
             queryset = queryset.filter(private=False)
-        
+
         # Find the earliest bookmark date
         earliest_bookmark = queryset.order_by('date_added').first()
         if not earliest_bookmark:
             context['activity_years'] = []
             context['title'] = 'Activity History'
             return context
-        
+
         # Get the year range
         earliest_year = earliest_bookmark.date_added.year
         current_year = datetime.now().year
@@ -221,8 +239,8 @@ class Charts(TemplateView):
 
         # Reverse so most recent year is first
         activity_years.reverse()
-        
+
         context['activity_years'] = activity_years
         context['title'] = 'Activity History'
-        
+
         return context
