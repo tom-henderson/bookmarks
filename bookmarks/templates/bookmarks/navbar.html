@@ -21,14 +21,18 @@
             <div class="form-group">
               <input type="text" class="form-control" name="search" placeholder="Search..." {% if request.GET.search %}value="{{request.GET.search}}"{% endif %}>
             </div>
-          </form> 
+          </form>
         </li>
 
         {% if user.is_authenticated %}
-          <li><a href="{% url 'bookmark_create' %}?{% url_replace request 'next' request.get_full_path %}">Add</a></li>
+          <li><a href="#"
+                 hx-get="{% url 'bookmark_create' %}?{% url_replace request 'next' request.get_full_path %}&modal=true"
+                 hx-target="#modals-here">Add</a></li>
         {% endif %}
 
-        <li><a href="#" data-toggle="modal" data-target="#filter-form">Filter</a></li>
+        <li><a href="#"
+               hx-get="/?partial=filter_modal{% if date_added_from %}&date_added_from={{date_added_from}}{% endif %}{% if date_added_to %}&date_added_to={{date_added_to}}{% endif %}"
+               hx-target="#modals-here">Filter</a></li>
         <li><a href="{% url 'charts' %}">Charts</a></li>
 
         {% if user.is_authenticated %}

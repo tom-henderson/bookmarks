@@ -1,6 +1,7 @@
 Django==6.0.5
 six==1.16.0
 sqlparse==0.5.5
+django-template-partials==25.3
 
 # Whitenoise: Staticfile hosting
 whitenoise==6.12.0
