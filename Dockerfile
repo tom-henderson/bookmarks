@@ -1,5 +1,6 @@
 # Base image with python dependencies
-FROM python:3.12-slim-bullseye as base
+# Django 6.1+ requires SQLite >= 3.37.0; bookworm ships 3.40 (bullseye only 3.34).
+FROM python:3.12-slim-bookworm as base
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 RUN apt-get update && \
