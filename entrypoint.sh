@@ -20,4 +20,15 @@ if [ -n "$FIRST_RUN" ]; then
     unset $FIRST_RUN
 fi
 
-gunicorn --bind 0.0.0.0:8000 --pythonpath app config.wsgi --log-file -
+# opentelemetry-instrumentation-django reads DJANGO_SETTINGS_MODULE and imports
+# the settings module during OTel's sitecustomize bootstrap — which runs before
+# gunicorn parses --pythonpath. Both env vars are needed: without
+# DJANGO_SETTINGS_MODULE the instrumentor calls settings.configure(); without
+# /app on PYTHONPATH the settings module fails to import and it ALSO calls
+# settings.configure(). Either path leaves _wrapped pinned to a
+# UserSettingsHolder, so wsgi.py's setdefault becomes a no-op and every
+# settings access falls through to django.conf.global_settings.
+export DJANGO_SETTINGS_MODULE="${DJANGO_SETTINGS_MODULE:-config.settings.production}"
+export PYTHONPATH="/app${PYTHONPATH:+:$PYTHONPATH}"
+
+exec opentelemetry-instrument gunicorn --bind 0.0.0.0:8000 config.wsgi --log-file -

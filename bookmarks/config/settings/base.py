@@ -190,12 +190,20 @@ DATABASES = {
 # LOGGING CONFIGURATION
 LOG_LEVEL = get_env_setting('LOG_LEVEL', default='INFO')
 DB_LOG_LEVEL = get_env_setting('DB_LOG_LEVEL', default='INFO')
+# disable_existing_loggers=False preserves the LoggingHandler that
+# opentelemetry-instrument attaches to the root logger during its sitecustomize
+# bootstrap. Django loggers propagate=True so their records reach that root
+# handler and get exported via OTLP. Do NOT instantiate
+# opentelemetry.sdk._logs.LoggingHandler from this dict — it is constructed
+# before the SDK's LoggerProvider is set, captures the ProxyLogger, and crashes
+# on every log emit with "ProxyLogger has no attribute 'resource'". And do NOT
+# add a `root` key here — it would replace the OTel-attached handler.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s] %(message)s",
             'datefmt': "%d/%b/%Y %H:%M:%S"
         },
         'simple': {
@@ -222,6 +230,7 @@ LOGGING = {
         'django.db.backends': {
             'level': DB_LOG_LEVEL,
             'handlers': ['console'],
+            'propagate': True,
         },
     }
 }
