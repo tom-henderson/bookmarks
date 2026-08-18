@@ -22,3 +22,13 @@ markdown==3.10.3
 git+https://github.com/tom-henderson/django-common
 
 gunicorn==26.0.0
+
+# OpenTelemetry
+opentelemetry-distro==0.50b0
+opentelemetry-exporter-otlp-proto-grpc==1.29.0
+opentelemetry-instrumentation-django==0.50b0
+opentelemetry-instrumentation-dbapi==0.50b0
+opentelemetry-instrumentation-sqlite3==0.50b0
+opentelemetry-instrumentation-requests==0.50b0
+opentelemetry-instrumentation-logging==0.50b0
+opentelemetry-instrumentation-wsgi==0.50b0
