@@ -5,28 +5,28 @@
 
 {% block content %}
 
-<form class="container form-horizontal" role="form" method="post" action".">
+<form class="container" role="form" method="post" action".">
   {% csrf_token %}
 
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       <h4>{{ subheading }}</h4>
 
       {% for field in form %}
 
-      <div class="form-group {% if field.errors %}has-error{% endif %}">
+      <div class="mb-3 row {% if field.errors %}is-invalid{% endif %}">
 
-        <label for="{{field.id_for_label}}" class="col-xs-4 col-sm-3 control-label">
+        <label for="{{field.id_for_label}}" class="col-4 col-sm-3 col-form-label">
           {{ field.label|title }}
         </label>
 
-        <div class="col-xs-6">
+        <div class="col-6">
           {% if field|field_type != "CheckboxInput" %}
             {{ field }}
           {% else %}
             <ul class="list-unstyled">
               {% for checkbox in field %}
-              <li class="checkbox">{{ checkbox }}</li>
+              <li class="form-check">{{ checkbox }}</li>
               {% endfor %}
             </ul>
           {% endif %}
@@ -37,9 +37,9 @@
       {% endfor %}
 
       <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <div class="col-xs-offset-4 col-sm-offset-3 col-xs-4">
+        <div class="col-12">
+          <div class="mb-3 row">
+            <div class="offset-4 offset-sm-3 col-4">
               <button type="submit" class="btn btn-primary">
                 {% if submit_button_label %}
                   {{ submit_button_label }}
@@ -59,22 +59,20 @@
 
 {% block scripts %}
 <script>
-var bloodhound = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-  queryTokenizer: Bloodhound.tokenizers.whitespace,
-  prefetch: {
-    url: '/api/tags/?format=json',
-    cache: false,
-  }
-});
-bloodhound.initialize();
+var tagsInput = document.querySelector('input[data-role=tagsinput]');
+if (tagsInput) {
+  var initialValue = tagsInput.value;
+  var tagify = new Tagify(tagsInput, {
+    enforceWhitelist: false,
+    dropdown: { enabled: 1, maxItems: 20, closeOnSelect: false },
+    originalInputValueFormat: function(values) {
+      return values.map(function(v) { return v.value; }).join(', ');
+    }
+  });
 
-$('input[data-role=tagsinput]').tokenfield({
-  typeahead: {
-    displayKey: 'name',
-    valueKey: 'name',
-    source: bloodhound.ttAdapter()
-  }
-});
+  fetch('/api/tags/?format=json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) { tagify.settings.whitelist = data.map(function(t) { return t.name; }); });
+}
 </script>
 {% endblock %}

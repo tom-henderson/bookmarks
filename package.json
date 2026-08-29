@@ -3,13 +3,12 @@
   "version": "0.0.1",
   "description": "Bookmarks manager.",
   "dependencies": {
-    "bootstrap": "3.4.1",
-    "bootstrap-datepicker": "1.7.1",
-    "bootstrap-tokenfield": "0.12.0",
-    "bootswatch": "^3.4.0",
+    "@yaireo/tagify": "^4.32.0",
+    "bootstrap": "^5.3.3",
+    "bootswatch": "^5.3.3",
+    "flatpickr": "^4.6.13",
     "font-awesome": "4.7.0",
-    "jquery": "3.5.1",
-    "typeahead.js": "0.11.1"
+    "jquery": "3.5.1"
   },
   "author": "Tom Henderson",
   "license": "MIT"
