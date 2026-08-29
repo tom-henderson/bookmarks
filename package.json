@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Bookmarks manager.",
   "dependencies": {
-    "bootstrap": "3.4.1",
+    "bootstrap": "5.0.0",
     "bootstrap-datepicker": "1.7.1",
     "bootstrap-tokenfield": "0.12.0",
     "bootswatch": "^3.4.0",
