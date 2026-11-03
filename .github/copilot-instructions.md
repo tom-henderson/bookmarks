@@ -83,6 +83,7 @@ Custom commands in `bookmarks/management/commands/` - example: `importbookmarks.
 ## Deployment Notes
 - GitHub Actions builds on master push → tags with `BASE_VERSION.RUN_NUMBER` → pushes to GitHub Packages
 - Entrypoint ([entrypoint.sh](../entrypoint.sh)) auto-migrates and creates superuser on fresh DB
+- Optional trusted proxy header auth (`REMOTE_USER_*` env vars, see README) via [remote_user.py](../bookmarks/bookmarks/remote_user.py); only wired into `MIDDLEWARE`/`AUTHENTICATION_BACKENDS` when `REMOTE_USER_HEADER` is set
 - Uses whitenoise compressed static files (no separate web server needed for statics)
 - SQLite database path from `SQLITE_DATABASE_PATH` env var, defaults to `bookmarks/db.sqlite3`
 

@@ -110,6 +110,45 @@ MIDDLEWARE = (
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+# AUTHENTICATION CONFIGURATION
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# TRUSTED PROXY HEADER (REMOTE USER) AUTHENTICATION
+# Opt-in: disabled unless REMOTE_USER_HEADER is set. Only enable this when the
+# app is reachable exclusively through a proxy that sets or strips these
+# headers on every route, otherwise anyone can log in by sending the header.
+# See README.md and bookmarks/remote_user.py.
+REMOTE_USER_HEADER = os.environ.get('REMOTE_USER_HEADER', '').strip()
+REMOTE_USER_FIELD = (os.environ.get('REMOTE_USER_FIELD', '').strip().lower()
+                     or 'username')
+if REMOTE_USER_FIELD not in ('username', 'email'):
+    raise ImproperlyConfigured(
+        "REMOTE_USER_FIELD must be 'username' or 'email', got %r" % REMOTE_USER_FIELD
+    )
+REMOTE_USER_CREATE_UNKNOWN = (
+    os.environ.get('REMOTE_USER_CREATE_UNKNOWN', '').strip().lower()
+    in ('true', '1', 'yes', 'on')
+)
+REMOTE_USER_GROUPS_HEADER = os.environ.get('REMOTE_USER_GROUPS_HEADER', '').strip()
+REMOTE_USER_ADMIN_GROUPS = [
+    group.strip()
+    for group in os.environ.get('REMOTE_USER_ADMIN_GROUPS', '').split(',')
+    if group.strip()
+]
+
+if REMOTE_USER_HEADER:
+    _auth_index = MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware')
+    MIDDLEWARE = (
+        MIDDLEWARE[:_auth_index + 1]
+        + ('bookmarks.remote_user.RemoteUserMiddleware',)
+        + MIDDLEWARE[_auth_index + 1:]
+    )
+    AUTHENTICATION_BACKENDS = (
+        'bookmarks.remote_user.RemoteUserBackend',
+    ) + AUTHENTICATION_BACKENDS
+
 # APP CONFIGURATION
 # Whitenoise must go here too so it loads before django.contrib.staticfiles
 DJANGO_APPS = (
@@ -222,6 +261,11 @@ LOGGING = {
         'django.db.backends': {
             'level': DB_LOG_LEVEL,
             'handlers': ['console'],
+        },
+        'bookmarks': {
+            'level': LOG_LEVEL,
+            'handlers': ['console'],
+            'propagate': False,
         },
     }
 }
