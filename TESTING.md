@@ -107,6 +107,23 @@ The test suite uses an in-memory SQLite database and MD5 password hashing for sp
 - An empty JSON array creates no bookmarks
 - A non-existent file path raises an exception
 
+### `bookmarks/tests/test_remote_user.py`
+
+**`RemoteUserSettingsTests`** — settings wiring for trusted proxy header auth (reloads `config.settings.base` with patched env vars):
+- Disabled by default: no middleware, only `ModelBackend`
+- `REMOTE_USER_HEADER` adds the middleware right after `AuthenticationMiddleware` and the backend before `ModelBackend`
+- Field / create / admin-group env vars are parsed; an invalid `REMOTE_USER_FIELD` raises `ImproperlyConfigured`
+
+**`RemoteUserDisabledTests`** — the `Remote-User` header is ignored when the feature is off
+
+**`RemoteUserAuthTests`** — behaviour with the middleware/backend enabled via `override_settings`:
+- Login by username; session persists on requests without the header; a different header user replaces the session
+- Login by email (case-insensitive), without re-logging-in on every request; ambiguous emails are refused
+- Unknown users rejected unless `REMOTE_USER_CREATE_UNKNOWN`; created users get the `Remote-Email` email and an unusable password
+- Inactive users refused
+- Admin groups grant and revoke `is_staff`/`is_superuser`; flags untouched unless both groups settings are set
+- Password login still works, and a password session is kept when the header names the same user
+
 ### `api/tests/test_api.py`
 
 **`APIBookmarksTests`** — `GET /api/all/`:
